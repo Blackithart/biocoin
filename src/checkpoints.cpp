@@ -23,10 +23,16 @@ namespace Checkpoints
     // + Contains no strange transactions
     //
     static MapCheckpoints mapCheckpoints =
-        boost::assign::map_list_of
-        ( 0,     std::make_pair(hashGenesisBlock, 1360105017) )
-        ( 1, std::make_pair(uint256("0x00000e3587271f32a010b49b19f80db2dd0903d0e928cdd7036ac434c98ad712"), 1364674052) )
-    ;
+    boost::assign::map_list_of
+      ( 0,     std::make_pair(hashGenesisBlock, 1499445391) )
+  ( 1, std::make_pair(uint256("0x00000e3587271f32a010b49b19f80db2dd0903d0e928cdd7036ac434c98ad712"), 1499446820) )
+  ( 2, std::make_pair(uint256("0x00000572834317fd00638f58895bf9ae0dbedb4e0d0bd1a1cae2108e6fa52d1c"), 1499446821) )
+  ( 34310, std::make_pair(uint256("0xc8bba1d9a741fe74f6f0b5378b90fe70c6688bbc43ba85c0f40f3553bb317c82"), 1504494264) )
+  ( 34334, std::make_pair(uint256("0x92781a461d4db426e461ca42609e30eda5dd82a134c4ac6f1fecf767e70647e4"), 1504498708) )
+  ( 56646, std::make_pair(uint256("0xcad365dbb7909aded0834109fd66405f78cd0815732b4fb96f64626c3143d275"), 1509782675) )
+  ( 103291, std::make_pair(uint256("0x87d1a0bc393072b255bb5d8ef002187ecc62e83e89ec1e35028ce3a4113c093b"), 1519851770) )
+  ( 112342, std::make_pair(uint256("0x9959a88fd81bf62ea8a65bbf3dfef0ec4e38ae233a53996132e22fedc854c2c7"), 1521734673) )
+       ;
 
     // TestNet has no checkpoints
     static MapCheckpoints mapCheckpointsTestnet =
@@ -39,7 +45,10 @@ namespace Checkpoints
         MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
 
         MapCheckpoints::const_iterator i = checkpoints.find(nHeight);
-        if (i == checkpoints.end()) return true;
+        if (i == checkpoints.end())
+        {
+            return true;
+        }
         return hash == i->second.first;
     }
 
@@ -199,7 +208,7 @@ namespace Checkpoints
         return false;
     }
 
-    // Automatically select a suitable sync-checkpoint 
+    // Automatically select a suitable sync-checkpoint
     uint256 AutoSelectSyncCheckpoint()
     {
         const CBlockIndex *pindex = pindexBest;
@@ -244,7 +253,7 @@ namespace Checkpoints
             return false;
         if (hashBlock == hashPendingCheckpoint)
             return true;
-        if (mapOrphanBlocks.count(hashPendingCheckpoint) 
+        if (mapOrphanBlocks.count(hashPendingCheckpoint)
             && hashBlock == WantedByOrphan(mapOrphanBlocks[hashPendingCheckpoint]))
             return true;
         return false;
@@ -361,7 +370,7 @@ namespace Checkpoints
         // sync-checkpoint should always be accepted block
         assert(mapBlockIndex.count(hashSyncCheckpoint));
         const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckpoint];
-        return (nBestHeight >= pindexSync->nHeight + nCoinbaseMaturity ||
+        return (pindexBest->nHeight >= pindexSync->nHeight + nCoinbaseMaturity ||
                 pindexSync->GetBlockTime() + nStakeMinAge < GetAdjustedTime());
     }
 }

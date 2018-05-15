@@ -440,7 +440,7 @@ CTransaction::GetLegacySigOpCount() const
     unsigned int nSigOps = 0;
     if (!IsCoinBase() || nTime < COINBASE_SIGOPS_SWITCH_TIME)
     {
-        // Coinbase scriptsigs are never executed, so there is 
+        // Coinbase scriptsigs are never executed, so there is
         //    no sense in calculation of sigops.
         BOOST_FOREACH(const CTxIn& txin, vin)
         {
@@ -1055,10 +1055,10 @@ CBigNum inline GetProofOfStakeLimit(int nHeight, unsigned int nTime)
 int64_t GetProofOfWorkReward(unsigned int nBits, int64_t nFees, int nHeight)
 {
     int64_t nSubsidy = 0.0001 * COIN;
-    
+
 	if (nHeight == 1)
 		return 1000000000 * COIN;
-	
+
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nBits=0x%08x nSubsidy=%" PRId64 "\n", FormatMoney(nSubsidy).c_str(), nBits, nSubsidy);
 
@@ -1073,8 +1073,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, unsigned int nBits, int64_t nTim
     int64_t nSubsidy = nCoinAge * nRewardCoinYear / 365;
 
     if (fDebug && GetBoolArg("-printcreation"))
-        printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
-
+printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRId64 "\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
     return nSubsidy; // + nFees;
 }
 
@@ -1158,11 +1157,11 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 	// Don't allow zero or negative values.
 	if (nActualSpacing < 1)
 		nActualSpacing = 1;
-	
+
 	// Limit the impact of blocks that are unusually far in the future
 	if (nActualSpacing > 3 * nTargetSpacing)
 		nActualSpacing = 3 * nTargetSpacing;
-	
+
     // ppcoin: target change every block
     // ppcoin: retarget with exponential moving toward target spacing
     CBigNum bnNew;
@@ -2025,7 +2024,7 @@ bool CBlock::SetBestChain(CTxDB& txdb, CBlockIndex* pindexNew)
 // ppcoin: total coin age spent in transaction, in the unit of coin-days.
 // Only those coins meeting minimum age requirement counts. As those
 // transactions not in main chain are not currently indexed so we
-// might not find out about their coin age. Older transactions are 
+// might not find out about their coin age. Older transactions are
 // guaranteed to be in main chain by sync-checkpoint. This rule is
 // introduced to help nodes establish a consistent view of the coin
 // age (trust score) of competing branches.
@@ -2196,7 +2195,7 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
 
     if (fProofOfStake)
     {
-        // Proof-of-STake related checkings. Note that we know here that 1st transactions is coinstake. We don't need 
+        // Proof-of-STake related checkings. Note that we know here that 1st transactions is coinstake. We don't need
         //   check the type of 1st transaction because it's performed earlier by IsProofOfStake()
 
         // nNonce must be zero for proof-of-stake blocks
@@ -2236,7 +2235,7 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
             return DoS(50, error("CheckBlock() : coinbase timestamp is too late"));
     }
 
-    // Iterate all transactions starting from second for proof-of-stake block 
+    // Iterate all transactions starting from second for proof-of-stake block
     //    or first for proof-of-work block
     for (unsigned int i = fProofOfStake ? 2 : 1; i < vtx.size(); i++)
     {
@@ -2308,7 +2307,7 @@ bool CBlock::AcceptBlock()
     // Check timestamp against prev
     if (GetBlockTime() <= nMedianTimePast || FutureDrift(GetBlockTime()) < pindexPrev->GetBlockTime())
         return error("AcceptBlock() : block's timestamp is too early");
- 
+
     // Don't accept blocks with future timestamps
      if (pindexPrev->nHeight < LAST_POW_BLOCK && pindexPrev->nHeight > 100000 && nMedianTimePast  + nMaxOffset < GetBlockTime())
         return error("AcceptBlock() : block's timestamp is too far in the future");
@@ -2478,9 +2477,9 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
     // Check for duplicate
     uint256 hash = pblock->GetHash();
     if (mapBlockIndex.count(hash))
-        return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
-    if (mapOrphanBlocks.count(hash))
-        return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
+       return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
+   if (mapOrphanBlocks.count(hash))
+       return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
 
     // Check proof-of-stake
     // Limited duplicity on stake: prevents block flood attack
@@ -2504,7 +2503,11 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
         uint256 hashProofOfStake = 0, targetProofOfStake = 0;
         if (!CheckProofOfStake(pblock->vtx[1], pblock->nBits, hashProofOfStake, targetProofOfStake))
         {
-            printf("WARNING: ProcessBlock(): check proof-of-stake failed for block %s\n", hash.ToString().c_str());
+          if (fDebug)
+                           printf("WARNING: ProcessBlock(): check proof-of-stake failed for block %s\n", hash.ToString().c_str());
+
+                       if (pfrom)
+                            pfrom->PushGetBlocks(pindexBest, pblock->GetHash());
             return false; // do not error here as we expect this during initial block download
         }
         if (!mapProofOfStake.count(hash)) // add to mapProofOfStake
@@ -2745,8 +2748,8 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nVersion = 1;
         block.nTime    = 1499445391;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 850372; // !fTestNet ? 1575379 : 46534;
-		
+        block.nNonce   = !fTestNet ? 850372 : 46534;
+
        if (true && (block.GetHash() != hashGenesisBlock)) {
 
         // This will figure out a valid hash and Nonce if you're
@@ -2765,7 +2768,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.print();
 
         //// debug print
-        //assert(block.hashMerkleRoot == uint256("0x4cb33b3b6a861dcbc685d3e614a9cafb945738d6833f182855679f2fad02057b"));
+        assert(block.hashMerkleRoot == uint256("0x11e50228b361818a219dc47c9c411aac7aa77573c2f5cdac1be50f103ca9dc5c"));
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());
 
@@ -3328,7 +3331,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
                 printf("  got inventory: %s  %s\n", inv.ToString().c_str(), fAlreadyHave ? "have" : "new");
 
             if (!fAlreadyHave)
-                pfrom->AskFor(inv);
+                pfrom->AskFor(inv, IsInitialBlockDownload());
             else if (inv.type == MSG_BLOCK && mapOrphanBlocks.count(inv.hash)) {
                 pfrom->PushGetBlocks(pindexBest, GetOrphanRoot(mapOrphanBlocks[inv.hash]));
             } else if (nInv == nLastBlock) {
@@ -3380,10 +3383,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
                     if (inv.hash == pfrom->hashContinue)
                     {
                         // ppcoin: send latest proof-of-work block to allow the
-                        // download node to accept as orphan (proof-of-stake 
+                        // download node to accept as orphan (proof-of-stake
                         // block might be rejected by stake connection check)
                         vector<CInv> vInv;
-                        vInv.push_back(CInv(MSG_BLOCK, GetLastBlockIndex(pindexBest, false)->GetBlockHash()));
+                        vInv.push_back(CInv(MSG_BLOCK, hashBestChain));
                         pfrom->PushMessage("inv", vInv);
                         pfrom->hashContinue = 0;
                     }
@@ -3593,8 +3596,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 
     // This asymmetric behavior for inbound and outbound connections was introduced
     // to prevent a fingerprinting attack: an attacker can send specific fake addresses
-    // to users' AddrMan and later request them by sending getaddr messages. 
-    // Making users (which are behind NAT and can only make outgoing connections) ignore 
+    // to users' AddrMan and later request them by sending getaddr messages.
+    // Making users (which are behind NAT and can only make outgoing connections) ignore
     // getaddr message mitigates the attack.
     else if ((strCommand == "getaddr") && (pfrom->fInbound))
     {

@@ -857,7 +857,7 @@ Keys were not saved.</source>
         <location filename="../bitcoingui.cpp" line="1119"/>
         <source>Keys were saved to this file:
 %2</source>
-        <translation>Ключи сохранены в 
+        <translation>Ключи сохранены в
 %2</translation>
     </message>
     <message>
@@ -1149,7 +1149,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <location filename="../coincontroldialog.cpp" line="555"/>
         <source>This label turns red, if any recipient receives an amount smaller than %1.
 
- This means a fee of at least %2 is required. 
+ This means a fee of at least %2 is required.
 
  Amounts below the minimum fee are shown as DUST.</source>
         <translation>Помечается красным, если какому-либо из получателей будет отправлено менее чем %1.
@@ -1334,27 +1334,27 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message>
         <location filename="../forms/intro.ui" line="23"/>
         <source>Welcome to BioCoin-qt.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добро пожаловать в BioCoin-qt.</translation>
     </message>
     <message>
         <location filename="../forms/intro.ui" line="49"/>
         <source>As this is the first time the program is launched, you can choose where BioCoin-qt will store its data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нажимая кнопку "ОК" вы соглашаетесь с Пользовательским соглашением изложенным на сайте (&lt;a href=&quot;biocoin.bio&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;BioCoin.bio&lt;/span&gt;&lt;/a&gt;) .</translation>
     </message>
     <message>
         <location filename="../forms/intro.ui" line="59"/>
         <source>BioCoin-qt will download and store a copy of the BioCoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">BioCoin-qt загрузит и сохранит копию цепочки блоков BioCoin. В этом каталоге будет храниться как минимум 1 ГБ данных, и со временем оно будет расти.</translation>
     </message>
     <message>
         <location filename="../forms/intro.ui" line="69"/>
         <source>Use the default data directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Использовать стандартный каталог</translation>
     </message>
     <message>
         <location filename="../forms/intro.ui" line="76"/>
         <source>Use a custom data directory:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Использовать свой каталог данных:</translation>
     </message>
     <message>
         <location filename="../intro.cpp" line="184"/>
