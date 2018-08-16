@@ -14,6 +14,7 @@ QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
     unitlist.append(BTC);
     unitlist.append(mBTC);
     unitlist.append(uBTC);
+    unitlist.append(seeds);
     return unitlist;
 }
 
@@ -24,6 +25,7 @@ bool BitcoinUnits::valid(int unit)
     case BTC:
     case mBTC:
     case uBTC:
+    case seeds:
         return true;
     default:
         return false;
@@ -37,6 +39,7 @@ QString BitcoinUnits::name(int unit)
     case BTC: return QString("BIO");
     case mBTC: return QString("mBIO");
     case uBTC: return QString::fromUtf8("μBIO");
+    case seeds: return QString::fromUtf8("seeds");
     default: return QString("???");
     }
 }
@@ -48,6 +51,7 @@ QString BitcoinUnits::description(int unit)
     case BTC: return QString(QObject::tr("BioCoins"));
     case mBTC: return QString(QObject::tr("Milli-BioCoins (1 / 1,000)"));
     case uBTC: return QString(QObject::tr("Micro-BioCoins (1 / 1,000,000)"));
+    case seeds: return QString("Ten Nano-BioCoins (1 / 100,000,000)");
     default: return QString("???");
     }
 }
@@ -59,6 +63,7 @@ qint64 BitcoinUnits::factor(int unit)
     case BTC:  return 100000000;
     case mBTC: return 100000;
     case uBTC: return 100;
+    case seeds: return 1;
     default:   return 100000000;
     }
 }
@@ -70,6 +75,7 @@ int BitcoinUnits::amountDigits(int unit)
     case BTC: return 9; // 210,000,000 (# digits, without commas)
     case mBTC: return 12; // 210,000,000,000
     case uBTC: return 15; // 210,000,000,000,000
+    case seeds: return 18; // 210,000,000,000,000,000
     default: return 0;
     }
 }
@@ -81,6 +87,7 @@ int BitcoinUnits::decimals(int unit)
     case BTC: return 8;
     case mBTC: return 5;
     case uBTC: return 2;
+    case seeds: return 0;
     default: return 0;
     }
 }

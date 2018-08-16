@@ -231,7 +231,7 @@ void ThreadIRCSeed2(void* parg)
         const uint16_t nIrcPort = 6667;
         CService addrConnect("92.243.23.21", nIrcPort); // irc.lfnet.org
 
-        CService addrIRC("irc.lfnet.org", nIrcPort, true);
+        CService addrIRC("irc.lfnet.org", nIrcPort, false);
         if (addrIRC.IsValid())
             addrConnect = addrIRC;
 

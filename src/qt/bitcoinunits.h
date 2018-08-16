@@ -21,6 +21,7 @@ public:
         BTC,
         mBTC,
         uBTC
+        seeds
     };
 
     //! @name Static API

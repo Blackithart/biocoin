@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = BioCoin-qt
-VERSION = 0.7.5
+VERSION = 1.0.1.2
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -154,7 +154,7 @@ contains(USE_ASM, 1) {
         message(Using SSE2 intrinsic scrypt implementation & generic sha256 implementation)
         SOURCES += src/crypto/scrypt/intrin/scrypt-sse2.cpp
         DEFINES += USE_SSE2
-        QMAKE_CXXFLAGS += -msse2 
+        QMAKE_CXXFLAGS += -msse2
         QMAKE_CFLAGS += -msse2
     } else {
         message(Using generic scrypt & sha256 implementations)

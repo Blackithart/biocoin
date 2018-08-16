@@ -32,12 +32,17 @@ namespace Checkpoints
   ( 56646, std::make_pair(uint256("0xcad365dbb7909aded0834109fd66405f78cd0815732b4fb96f64626c3143d275"), 1509782675) )
   ( 103291, std::make_pair(uint256("0x87d1a0bc393072b255bb5d8ef002187ecc62e83e89ec1e35028ce3a4113c093b"), 1519851770) )
   ( 112342, std::make_pair(uint256("0x9959a88fd81bf62ea8a65bbf3dfef0ec4e38ae233a53996132e22fedc854c2c7"), 1521734673) )
+  ( 130000, std::make_pair(uint256("0x9faea5e80bf626e590ce7aaa239dd510d0e372e99482afc3966c64b9cd769080"), 1525403103) )
+  ( 150000, std::make_pair(uint256("0x6070ef71efdcdbdfdf98954faf3b141cdf7ff30bba5bcca276a1f6c93326e04b"), 1529566100) )
+  ( 170000, std::make_pair(uint256("0x47e9b3ae09ef554fec982957c040773c5d2aee2f99af7c8369938b988cd5049e"), 1533686156) )
        ;
 
     // TestNet has no checkpoints
     static MapCheckpoints mapCheckpointsTestnet =
         boost::assign::map_list_of
-        ( 0, std::make_pair(hashGenesisBlockTestNet, 1360105017) )
+        ( 0, std::make_pair(hashGenesisBlockTestNet, 1499445391) )
+        ( 1, std::make_pair(uint256("0x0000d2884ac3f47e20f99324ecc25650f1cbd57baed72b9aa12cb98d188a02e5"), 1499445653) )
+        ( 1000, std::make_pair(uint256("0x0000000003a65e950755499b73424306b65915a96e71fcc9e175217cc78e02c3"), 1532955774) )
         ;
 
     bool CheckHardened(int nHeight, const uint256& hash)
