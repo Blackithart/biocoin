@@ -1,0 +1,55 @@
+Minimum VPS requirements:
+- Ubuntu (14.04 x64)
+- 1 Gb ram
+- 20 Gb disk space
+- 1 vCore CPU
+
+
+Set up a swapfile if your system has less than 1.5GB of memory:
+
+fallocate -l 2G /swapfile
+chown root:root /swapfile
+chmod 0600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+
+Initialize swapfile automatically on boot
+
+nano /etc/fstab
+Add this at the bottom: /swapfile none swap sw 0 0
+
+Install all required dependencies:
+
+apt-get update && apt-get upgrade
+apt-get install ntp unzip git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev aptitude && aptitude install miniupnpc libminiupnpc-dev libssl1.0-dev
+
+Pull the source code from github, or upload it yourself:
+
+git clone https://github.com/Blackithart/biocoin
+
+cd /biocoin/src
+make -f makefile.unix
+
+Strip the file to make it smaller, then relocate it:
+
+strip BioCoind
+cp BioCoind /usr/bin
+
+Now run the daemon:
+
+BioCoind
+
+It will return an error, telling you to set up config file in a directory. Now we’ll set up the config file. Note that this is case sensitive.
+
+nano ~/.BioCoin/BioCoin.conf
+
+Add the following, save and exit:
+
+daemon=1
+server=1
+rpcuser=(username)
+rpcpassword=(strong password)
+
+Run BioCoind once more and if you did everything correctly, your daemon is now online!
+Type BioCoind help for a full list of commands available. 
