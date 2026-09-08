@@ -1,0 +1,14 @@
+.git
+**/*.o
+src/obj
+src/BioCoind
+src/leveldb
+MSVC
+contrib
+doc
+*.pro
+*.pro.user
+qt.pro
+qt-mac.pro
+README
+contib
