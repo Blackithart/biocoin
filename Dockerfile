@@ -42,7 +42,6 @@ COPY --from=build /src/src/BioCoind /usr/local/bin/BioCoind
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-VOLUME ["/data"]
 EXPOSE 24885 24889
 WORKDIR /data
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
