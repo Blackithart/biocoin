@@ -7,7 +7,9 @@
 #include "editaddressdialog.h"
 #include "csvmodelwriter.h"
 #include "guiutil.h"
+#ifdef USE_QRCODE
 #include "qrcodedialog.h"
+#endif
 
 #include <QSortFilterProxyModel>
 #include <QClipboard>
@@ -335,6 +337,7 @@ void AddressBookPage::exportClicked()
 
 void AddressBookPage::on_showQRCode_clicked()
 {
+#ifdef USE_QRCODE
     QTableView *table = ui->tableView;
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
 
@@ -348,6 +351,7 @@ void AddressBookPage::on_showQRCode_clicked()
         dialog->setAttribute(Qt::WA_DeleteOnClose);
         dialog->show();
     }
+#endif
 }
 
 void AddressBookPage::contextualMenu(const QPoint &point)

@@ -7,7 +7,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE __STDC_FORMAT_MACROS __STDC_LIMIT_MACROS
 CONFIG += no_include_pwd
 CONFIG += thread
-CONFIG += static
+win32:CONFIG += static
+QMAKE_CXXFLAGS += -std=gnu++11
+QMAKE_CFLAGS += -std=gnu11
 
 freebsd-g++: QMAKE_TARGET.arch = $$QMAKE_HOST.arch
 linux-g++: QMAKE_TARGET.arch = $$QMAKE_HOST.arch
@@ -206,6 +208,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/addrman.h \
     src/base58.h \
     src/bignum.h \
+    src/opensslcompat.h \
     src/checkpoints.h \
     src/compat.h \
     src/coincontrol.h \
@@ -276,8 +279,15 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/multisigaddressentry.h \
     src/qt/multisiginputentry.h \
     src/qt/multisigdialog.h \
-    src/qt/secondauthdialog.h \
-    src/qt/qrcodedialog.h
+    src/qt/secondauthdialog.h
+
+# use: qmake "USE_QRCODE=1"
+# libqrencode must be installed for QR code support
+contains(USE_QRCODE, 1) {
+    message(Building with QRCode support)
+    DEFINES += USE_QRCODE
+    HEADERS += src/qt/qrcodedialog.h
+}
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/intro.cpp \
@@ -355,8 +365,11 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/multisiginputentry.cpp \
     src/qt/multisigdialog.cpp \
     src/qt/secondauthdialog.cpp \
-    src/qt/qrcodedialog.cpp \
     src/base58.cpp
+
+contains(USE_QRCODE, 1) {
+    SOURCES += src/qt/qrcodedialog.cpp
+}
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -378,8 +391,11 @@ FORMS += \
     src/qt/forms/multisigaddressentry.ui \
     src/qt/forms/multisiginputentry.ui \
     src/qt/forms/multisigdialog.ui \
-    src/qt/forms/secondauthdialog.ui \
-    src/qt/forms/qrcodedialog.ui
+    src/qt/forms/secondauthdialog.ui
+
+contains(USE_QRCODE, 1) {
+    FORMS += src/qt/forms/qrcodedialog.ui
+}
 
 CODECFORTR = UTF-8
 
@@ -475,7 +491,10 @@ macx:QMAKE_CXXFLAGS_THREAD += -pthread
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
 LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-LIBS += -lqrencode -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+contains(USE_QRCODE, 1) {
+    LIBS += -lqrencode
+}
 # -lgdi32 has to happen after -lcrypto (see  #681)
 windows:LIBS += -lws2_32 -lshlwapi -lmswsock -lole32 -loleaut32 -luuid -lgdi32
 LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX

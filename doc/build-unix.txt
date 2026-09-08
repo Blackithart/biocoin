@@ -51,11 +51,13 @@ Dependency Build Instructions: Ubuntu & Debian
 ----------------------------------------------
 sudo apt-get install build-essential
 sudo apt-get install libssl-dev
-sudo apt-get install libdb4.8-dev
-sudo apt-get install libdb4.8++-dev
- Boost 1.40+: sudo apt-get install libboost-all-dev
- or Boost 1.37: sudo apt-get install libboost1.37-dev
+sudo apt-get install libdb++-dev
+sudo apt-get install libboost-all-dev
 sudo apt-get install libqrencode-dev
+
+On current Ubuntu (22.04/24.04) this uses OpenSSL 3, Boost 1.74+ and Berkeley DB 5.3.
+The source is compatible with those libraries. Historical notes below still apply
+if you are building against older packages (Berkeley DB 4.8 / Boost 1.37).
 
 If using Boost 1.37, append -mt to the boost libraries in the makefile.
 
