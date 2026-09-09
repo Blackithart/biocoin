@@ -13,7 +13,7 @@ BioCoin is a NovaCoin/Peercoin-style proof-of-stake coin.
 | Protocol | `90000` |
 | Config | `~/.BioCoin/BioCoin.conf` (directory name is case-sensitive) |
 
-**Revival (2026), short status.** The daemon was made to build on current Linux (OpenSSL 3 / Boost) and two Railway peer nodes were brought online. They talk to each other. The chain they share stops at last observed height **115366** (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A genesis-only node cannot pass that checkpoint. The original operator (Artem Kalinin / Blackithart) has **no more** `blk` files, peers, or backups to provide. Continuation needs authentic `blk*.dat` / `bootstrap.dat` past 115366 (ideally past 170000) and/or an external live BIO peer.
+**Revival (2026), short status.** The daemon was made to build on current Linux (OpenSSL 3 / Boost) and two Railway peer nodes were brought online. They talk to each other. The chain they share stops at last observed height **115366** (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A genesis-only node cannot pass that checkpoint. The original operator (Artem Kalinin / Blackithart) has **no more** `blk` files, peers, or backups to provide. Continuation needs authentic `blk*.dat` / `bootstrap.dat` past 115366 (ideally past 170000) and/or an external live BIO peer. Some on-exchange activity related to BIO was noticed on YoBit; the revival effort tried to contact YoBit and received no reply.
 
 Marketing site (not this repo, not the blockchain): https://biocoin.blackithart.com
 
@@ -30,6 +30,7 @@ What was done:
    The nodes see each other over P2P.
 3. A local wallet can be used with the node. Wallets and keys **must never be committed**.
 4. The old public site was restored separately at **https://biocoin.blackithart.com**. That is a different project, not the BioCoin C++ tree.
+5. Some on-exchange activity related to BIO was noticed on YoBit. The revival effort tried to contact YoBit; there was no response. Treat this as a possible remaining external venue or peer lead that did not pan out for now — not as proof the chain is alive, and not as an accusation.
 
 What was not recovered: **the chain after height 115366.** Checkpoints in the code require block **170000**. Without historical `blk*.dat` / `bootstrap.dat` (ideally past checkpoint 170000) or a live external peer with the same magic, a full-history sync is not possible.
 
@@ -47,7 +48,7 @@ Working:
 Not present:
 
 - Historical chain **after 115366** (through checkpoint 170000 and beyond).
-- An external peer network. Observed connections are between the two Railway nodes.
+- An external peer network. Observed connections are between the two Railway nodes. YoBit was a possible remaining venue or peer lead; outreach received no reply.
 - Full sync from empty genesis: `GetTotalBlocksEstimate()` uses the last hardened checkpoint (**170000**). **Do not disable checkpoints.**
 
 Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, `moneysupply ≈ 818600206 BIO`, `connections: 3` (all to the second node). The second node was at 115365 at that time. If RPC is unavailable, treat **115366 as last observed**.
@@ -57,7 +58,7 @@ Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer
 Concrete steps if you have chain data or a live peer:
 
 1. Obtain **authentic** BioCoin `blk*.dat` and/or `bootstrap.dat` that cover height **after 115366**, preferably **after checkpoint 170000**. Do not load foreign block databases or foreign wallets.
-2. Look for a live P2P peer that speaks magic **`b4 f9 e1 a5`** on port **24885** (old nodes, exchanges, archives). Connect with `addnode`.
+2. Look for a live P2P peer that speaks magic **`b4 f9 e1 a5`** on port **24885** (old nodes, exchanges, archives). Connect with `addnode`. A live exchange node (for example YoBit, if they still run BIO) would still help, but outreach so far received no reply.
 3. Run a node from this repository (Docker or `makefile.unix`). Example peer: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints** (`-cppolicy` / permissive) to “skip” 170000 — that breaks verification of known history.
 4. The website is independent: https://biocoin.blackithart.com — it is not in this git tree.
 5. A local wallet can be used with the node. **Never commit** wallets, keys, or private backups.

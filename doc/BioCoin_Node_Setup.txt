@@ -11,6 +11,8 @@ A public peer from the 2026 revival (last observed height 115366) is:
 That peer does not have the chain past 115366. Hardened checkpoints in
 src/checkpoints.cpp go to block 170000. A new node will not fully sync
 from genesis against these peers. Do not disable checkpoints.
+A live exchange node (for example YoBit, if they still run BIO) would
+still help, but outreach so far received no reply.
 See README.md and doc/revival-2026.md.
 
 Minimum Ubuntu (14.04 x64) notes below are historical. On Ubuntu 24.04

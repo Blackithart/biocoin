@@ -2,7 +2,7 @@
 
 Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next person does not repeat the same dead ends. This file is a record, not a roadmap with hidden data.
 
-Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**. Checkpoints require **170000**. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past that height or a live external BIO peer.
+Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**. Checkpoints require **170000**. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past that height or a live external BIO peer. Some on-exchange activity related to BIO was noticed on YoBit; contact attempts received no reply.
 
 ## What this tree is
 
@@ -59,6 +59,10 @@ The old public site was recovered and deployed separately.
 
 Do not copy the site sources into https://github.com/Blackithart/biocoin.
 
+### YoBit (possible remaining venue)
+
+Some on-exchange activity related to BIO was noticed on YoBit. The revival effort tried to contact YoBit; there was no response. Treat YoBit as a possible remaining external venue or peer lead that did not pan out for now — not as proof the chain is alive, and not as an accusation.
+
 ## Hard stop from the original operator
 
 Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `blk*.dat`, no extra peers to introduce, no backups. Treat that as a fact. Future work does not wait on the original team.
@@ -66,7 +70,7 @@ Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `
 ## How to continue
 
 1. Obtain authentic BioCoin block files covering **at least past 115366**, preferably **past checkpoint 170000**. `bootstrap.dat` is useful if it is BIO magic `b4 f9 e1 a5` and actually contains that range.
-2. Find any remaining live P2P peer (exchanges, old VPS, archived nodes) that still speaks BIO on port 24885 with that magic. `addnode=<host>:24885` or the Railway TCP proxy port if that is how the peer is published.
+2. Find any remaining live P2P peer (exchanges, old VPS, archived nodes) that still speaks BIO on port 24885 with that magic. `addnode=<host>:24885` or the Railway TCP proxy port if that is how the peer is published. A live exchange node (for example YoBit, if they still run BIO) would still help, but outreach so far received no reply.
 3. Run the Docker/Railway node from this repo (or `makefile.unix` after the Linux patches). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on.
 4. Never load foreign wallets or foreign block databases onto a BIO node. Wrong magic / wrong genesis will not become BioCoin by renaming files.
 5. Website work stays at https://biocoin.blackithart.com — independent of this C++ tree.
