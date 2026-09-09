@@ -2,7 +2,7 @@
 
 Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next person does not repeat the same dead ends. This file is a record, not a roadmap with hidden data.
 
-Кратко по-русски: ноды собраны и двое пиров на Railway общаются; цепочка обрывается на высоте **115366**; чекпоинты требуют **170000**; у исходного оператора больше нет blk-файлов, пиров и бэкапов. Дальше нужны чужие аутентичные блоки или живой внешний BIO-пир.
+Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**. Checkpoints require **170000**. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past that height or a live external BIO peer.
 
 ## What this tree is
 
@@ -27,7 +27,7 @@ Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next 
 
 - OpenSSL 3 and current Boost patches so `makefile.unix` builds on Ubuntu 24.04.
 - `Dockerfile` (multi-stage Ubuntu 24.04 → `BioCoind`), `docker/entrypoint.sh`, `railway.toml`.
-- Related PRs on this GitHub repo: Linux/OpenSSL3/Boost + Docker/Railway; wallet restore / `BIOCOIN_ADDNODE` / docs. They may still be unmerged when you read this.
+- Related PRs on this GitHub repo: Linux/OpenSSL3/Boost + Docker/Railway; `BIOCOIN_ADDNODE` / docs. They may still be unmerged when you read this.
 
 ### Live peers (Railway project `biocoin-peer`)
 
@@ -46,24 +46,22 @@ Observed `getinfo` on 2026-09-09 via `railway ssh`:
 
 The two nodes can replicate **what they already have**. They cannot invent blocks after 115366.
 
-### Wallet restore
+### Wallet
 
-A 2017-era `dumpwallet` was used only to restore a wallet onto the running node. Keys, `wallet.dat`, dump files, and ICO ledgers must not be committed. Addresses are not listed here.
+A local wallet can be used with the node. Wallets and keys must never be committed.
 
 ### Website (not this git repo)
 
-Old Laravel 5.2 marketing/loyalty site (biocoin.bio, 2018) was recovered from a Google Drive zip, sanitized (no ICO encrypted ETH keys, no RPC spend), and deployed as a separate Railway project `biocoin-web`.
+The old public site was recovered and deployed separately.
 
 - Public URL: https://biocoin.blackithart.com
-- Pages that were brought up: `/`, `/ru`, `/en`, `/fr`, `/blog`, `/faq`, `/loyalty`, `/media`
-- Loyalty entity-sale/purchase forms were repaired (missing mix CSS; captcha package gone).
-- ICO / send-coins / admin routes disabled; rate display stubbed.
+- That project is independent of this C++ tree.
 
-Do not copy that Laravel tree (~66MB) into https://github.com/Blackithart/biocoin.
+Do not copy the site sources into https://github.com/Blackithart/biocoin.
 
 ## Hard stop from the original operator
 
-Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `blk*.dat`, no extra peers to introduce, no more wallets or backups. Treat that as a fact. Future work does not wait on the original team.
+Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `blk*.dat`, no extra peers to introduce, no backups. Treat that as a fact. Future work does not wait on the original team.
 
 ## How to continue
 
@@ -72,7 +70,7 @@ Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `
 3. Run the Docker/Railway node from this repo (or `makefile.unix` after the Linux patches). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on.
 4. Never load foreign wallets or foreign block databases onto a BIO node. Wrong magic / wrong genesis will not become BioCoin by renaming files.
 5. Website work stays at https://biocoin.blackithart.com — independent of this C++ tree.
-6. Never commit keys, `wallet.dat`, `wallet.dat.restore`, dumpwallet output, or ICO key JSON.
+6. Never commit wallets or keys.
 
 ## RPC reminder
 

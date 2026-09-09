@@ -77,4 +77,4 @@ BioCoind addnode altaria.proxy.rlwy.net:45218 add
 RPC port: 24889
 Network port: 24885
 
-Do not commit wallet.dat, dumpwallet files, or keys.
+A local wallet can be used with the node. Wallets and keys must never be committed.

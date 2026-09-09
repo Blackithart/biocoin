@@ -1,6 +1,8 @@
 # BioCoin (BIO)
 
-This repository is the **BioCoin node and wallet source**: the `BioCoind` daemon and the `BioCoin-qt` graphical wallet. BioCoin is a NovaCoin/Peercoin-style proof-of-stake coin.
+This repository is the **BioCoin node and wallet source**: the `BioCoind` daemon and the `BioCoin-qt` graphical wallet. It is not a website and not a block database.
+
+BioCoin is a NovaCoin/Peercoin-style proof-of-stake coin.
 
 | | |
 | --- | --- |
@@ -9,79 +11,66 @@ This repository is the **BioCoin node and wallet source**: the `BioCoind` daemon
 | RPC port | `24889` |
 | Network magic | `b4 f9 e1 a5` |
 | Protocol | `90000` |
+| Config | `~/.BioCoin/BioCoin.conf` (directory name is case-sensitive) |
 
-**Revival (2026), short status.** The daemon was made to build on current Linux (OpenSSL 3 / Boost) and two Railway peer nodes were brought online. They talk to each other. The chain they share stops at last observed height **115366** (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A genesis-only node cannot pass that checkpoint. The original operator (Artem Kalinin / Blackithart) has **no further chain data, wallets, backups, or peers to supply**. Continuation needs authentic `blk*.dat` / `bootstrap.dat` past 115366 (ideally past 170000) and/or an external live BIO peer.
+**Revival (2026), short status.** The daemon was made to build on current Linux (OpenSSL 3 / Boost) and two Railway peer nodes were brought online. They talk to each other. The chain they share stops at last observed height **115366** (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A genesis-only node cannot pass that checkpoint. The original operator (Artem Kalinin / Blackithart) has **no more** `blk` files, peers, or backups to provide. Continuation needs authentic `blk*.dat` / `bootstrap.dat` past 115366 (ideally past 170000) and/or an external live BIO peer.
 
 Marketing site (not this repo, not the blockchain): https://biocoin.blackithart.com
 
 Details: [`doc/revival-2026.md`](doc/revival-2026.md). How to run a node: [`doc/BioCoin_Node_Setup.txt`](doc/BioCoin_Node_Setup.txt).
 
----
+## Revival, 2026
 
-# BioCoin — исходники ноды и кошелька
+What was done:
 
-Это публичный репозиторий **ноды и кошелька BioCoin**: демон `BioCoind` и графический кошелёк `BioCoin-qt`. Это не сайт, не ICO-кабинет и не база блоков.
-
-BioCoin — монета на proof-of-stake в линии NovaCoin / Peercoin.
-
-- Тикер: **BIO**
-- P2P: **24885**
-- RPC: **24889**
-- Magic: **`b4 f9 e1 a5`**
-- Конфиг: `~/.BioCoin/BioCoin.conf` (регистр имени каталога важен)
-
-## Попытка возрождения, 2026
-
-Что сделано:
-
-1. Исходники приведены к сборке на современном Linux (OpenSSL 3, Boost). Добавлены Docker-образ и конфиг Railway. Эта работа живёт в отдельных PR к этому репозиторию (Linux/Docker и запуск peer-ноды), её ещё может не быть в `master`.
-2. Подняты две публичные peer-ноды в Railway-проекте `biocoin-peer` (production):
+1. The source was brought up to build on current Linux (OpenSSL 3, Boost). A Docker image and Railway config were added. That work lives in separate PRs on this repository (Linux/Docker and peer-node deploy) and may not yet be on `master`.
+2. Two public peer nodes were brought up in the Railway project `biocoin-peer` (production):
    - `biocoin-peer` — `altaria.proxy.rlwy.net:45218`
    - `biocoin-peer-2` — `altaria.proxy.rlwy.net:22792` (`BIOCOIN_ADDNODE=altaria.proxy.rlwy.net:45218`)
-   Ноды видят друг друга по P2P.
-3. На ноду восстанавливался кошелёк из старого `dumpwallet`. Файлы кошелька и ключи **в этот репозиторий не входят и не должны попадать**.
-4. Старый маркетинговый/лояльный сайт (Laravel 5.2, 2018) восстановлен отдельно и выложен на **https://biocoin.blackithart.com**. Это другой проект, не C++-дерево BioCoin.
+   The nodes see each other over P2P.
+3. A local wallet can be used with the node. Wallets and keys **must never be committed**.
+4. The old public site was restored separately at **https://biocoin.blackithart.com**. That is a different project, not the BioCoin C++ tree.
 
-Чего не получилось: **цепочка после высоты 115366 так и не найдена.** Чекпоинты в коде требуют блок **170000**. Без исторических `blk*.dat` / `bootstrap.dat` (лучше — за чекпоинт 170000) или живого внешнего пира с той же magic-подписью синхронизация полной истории невозможна.
+What was not recovered: **the chain after height 115366.** Checkpoints in the code require block **170000**. Without historical `blk*.dat` / `bootstrap.dat` (ideally past checkpoint 170000) or a live external peer with the same magic, a full-history sync is not possible.
 
-Оператор исходной сети подтвердил: **больше данных нет** — ни оставшихся blk-файлов, ни дополнительных пиров, ни кошельков или бэкапов. Ждать недостающую цепочку от первоначальной команды не нужно.
+The original operator confirmed there is **no more data** — no remaining blk files, extra peers, or backups. Do not wait on the original team for the missing chain.
 
-## Текущее состояние
+## Current status
 
-Работает:
+Working:
 
-- Сборка `BioCoind` на современном Linux (после патчей OpenSSL 3 / Boost; см. связанные PR).
-- Docker-образ и деплой peer-ноды на Railway.
-- Две ноды на Railway, связь между ними, общая высота около **115366**.
-- Сайт https://biocoin.blackithart.com — страницы `/`, `/ru`, `/en`, `/fr`, `/blog`, `/faq`, `/loyalty`, `/media`. Маршруты ICO / send-coins / admin отключены.
+- `BioCoind` builds on current Linux (after OpenSSL 3 / Boost patches; see related PRs).
+- Docker image and Railway peer-node deploy.
+- Two Railway nodes, connected to each other, shared height about **115366**.
+- Site https://biocoin.blackithart.com (separate from this repository).
 
-Не работает / отсутствует:
+Not present:
 
-- Историческая цепочка **после 115366** (до чекпоинта 170000 и далее).
-- Сеть внешних пиров. Наблюдаемые соединения — между двумя нашими Railway-нодами.
-- Полный синк с пустого genesis-состояния: `GetTotalBlocksEstimate()` смотрит на последний hardened checkpoint (**170000**). Чекпоинты **не отключать**.
+- Historical chain **after 115366** (through checkpoint 170000 and beyond).
+- An external peer network. Observed connections are between the two Railway nodes.
+- Full sync from empty genesis: `GetTotalBlocksEstimate()` uses the last hardened checkpoint (**170000**). **Do not disable checkpoints.**
 
-Последние RPC-цифры (2026-09-09, `getinfo` по SSH на Railway): нода `biocoin-peer` — `blocks: 115366`, `moneysupply ≈ 818600206 BIO`, `connections: 3` (все на вторую нашу ноду). Вторая нода в тот момент была на 115365. Если RPC недоступен, считать **115366 last observed**.
+Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, `moneysupply ≈ 818600206 BIO`, `connections: 3` (all to the second node). The second node was at 115365 at that time. If RPC is unavailable, treat **115366 as last observed**.
 
-## Как продолжить
+## How to continue
 
-Конкретные шаги для тех, у кого есть цепочка или живой пир:
+Concrete steps if you have chain data or a live peer:
 
-1. Достать **аутентичные** BioCoin `blk*.dat` и/или `bootstrap.dat`, которые покрывают высоту **после 115366**, лучше **после чекпоинта 170000**. Не подкладывать чужие базы блоков и чужие `wallet.dat`.
-2. Искать живой P2P-пир, который говорит magic **`b4 f9 e1 a5`** на порту **24885** (старые ноды, биржи, архивы). Подключать через `addnode`.
-3. Поднять ноду из этого репозитория (Docker или `makefile.unix`). Пример пира: `addnode=altaria.proxy.rlwy.net:45218`. **Не отключать checkpoints** (`-cppolicy` / permissive) ради «обхода» 170000 — это сломает проверку известной истории.
-4. Сайт независим: https://biocoin.blackithart.com — его нет в этом git-дереве и в него не нужно складывать ~66MB Laravel.
-5. **Не коммитить** `wallet.dat`, `dumpwallet`, ключи, ICO JSON, приватные бэкапы.
+1. Obtain **authentic** BioCoin `blk*.dat` and/or `bootstrap.dat` that cover height **after 115366**, preferably **after checkpoint 170000**. Do not load foreign block databases or foreign wallets.
+2. Look for a live P2P peer that speaks magic **`b4 f9 e1 a5`** on port **24885** (old nodes, exchanges, archives). Connect with `addnode`.
+3. Run a node from this repository (Docker or `makefile.unix`). Example peer: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints** (`-cppolicy` / permissive) to “skip” 170000 — that breaks verification of known history.
+4. The website is independent: https://biocoin.blackithart.com — it is not in this git tree.
+5. A local wallet can be used with the node. **Never commit** wallets, keys, or private backups.
 
-Подробнее: [`doc/revival-2026.md`](doc/revival-2026.md).
+More detail: [`doc/revival-2026.md`](doc/revival-2026.md).
 
-## Сборка и запуск
+## Build and run
 
-Команды ниже совпадают с файлами в дереве. Не выдумывайте другие порты или magic.
+The commands below match the files in the tree. Do not invent other ports or magic.
 
-### Демон на Linux
+### Linux daemon
 
-См. также `doc/build-unix.txt`. Кратко (Ubuntu/Debian):
+See also `doc/build-unix.txt`. Short version (Ubuntu/Debian):
 
 ```
 sudo apt-get install build-essential libssl-dev libdb++-dev libboost-all-dev
@@ -90,11 +79,11 @@ make -f makefile.unix
 strip BioCoind
 ```
 
-На Ubuntu 22.04/24.04 стоят OpenSSL 3 и Boost 1.74+. В `master` без патчей совместимости сборка на OpenSSL 3, как правило, падает. Патчи и Docker — в PR Linux-сборки / Railway-ноды к этому репозиторию.
+Ubuntu 22.04/24.04 ship OpenSSL 3 and Boost 1.74+. On `master` without the compatibility patches, an OpenSSL 3 build typically fails. Patches and Docker are in the Linux-build / Railway-node PRs on this repository.
 
-Qt-кошелёк: `doc/readme-qt.rst`. QR-коды опциональны: `libqrencode-dev` и `qmake USE_QRCODE=1`.
+Qt wallet: `doc/readme-qt.rst`. QR codes are optional: `libqrencode-dev` and `qmake USE_QRCODE=1`.
 
-### Конфиг ноды
+### Node config
 
 `~/.BioCoin/BioCoin.conf`:
 
@@ -109,13 +98,13 @@ rpcport=24889
 addnode=altaria.proxy.rlwy.net:45218
 ```
 
-Затем `BioCoind`. Подключиться к живому пиру вручную: `BioCoind addnode altaria.proxy.rlwy.net:45218 add`.
+Then `BioCoind`. To join the live peer by hand: `BioCoind addnode altaria.proxy.rlwy.net:45218 add`.
 
-Пустой узел **не** догонит чекпоинт 170000, пока нет блоков после 115366.
+An empty node **will not** catch checkpoint 170000 until there are blocks after 115366.
 
-### Docker и Railway
+### Docker and Railway
 
-Файлы `Dockerfile`, `docker/entrypoint.sh`, `railway.toml` появляются вместе с PR Linux/Docker (их может не быть в текущем `master`). Когда они в дереве:
+`Dockerfile`, `docker/entrypoint.sh`, and `railway.toml` land with the Linux/Docker PRs (they may not be on current `master`). When they are in the tree:
 
 ```
 docker build -t biocoin-peer .
@@ -125,16 +114,16 @@ docker run --rm -p 24885:24885 \
   biocoin-peer
 ```
 
-Переменные entrypoint: `BIOCOIN_DATADIR` (по умолчанию `/data`), `BIOCOIN_P2P_PORT` (`24885`), `BIOCOIN_RPC_PORT` (`24889`), `BIOCOIN_RPC_USER`, `BIOCOIN_RPC_PASSWORD`, `BIOCOIN_ADDNODE`, `BIOCOIN_EXTERNAL_IP`, `BIOCOIN_EXTRA_ARGS`. RPC в образе слушает `127.0.0.1`.
+Entrypoint variables: `BIOCOIN_DATADIR` (default `/data`), `BIOCOIN_P2P_PORT` (`24885`), `BIOCOIN_RPC_PORT` (`24889`), `BIOCOIN_RPC_USER`, `BIOCOIN_RPC_PASSWORD`, `BIOCOIN_ADDNODE`, `BIOCOIN_EXTERNAL_IP`, `BIOCOIN_EXTRA_ARGS`. RPC in the image listens on `127.0.0.1`.
 
-`railway.toml`: builder `DOCKERFILE`, `dockerfilePath = "Dockerfile"`, restart `ON_FAILURE` (5 попыток). Проект Railway: `biocoin-peer`.
+`railway.toml`: builder `DOCKERFILE`, `dockerfilePath = "Dockerfile"`, restart `ON_FAILURE` (5 retries). Railway project: `biocoin-peer`.
 
-Не монтируйте в `/data` чужой `wallet.dat` и не коммитьте том с ключами.
+A local wallet can be used with the node. Do not load a foreign wallet into `/data`, and do not commit a volume that contains keys.
 
-## Сайт (отдельный проект)
+## Website (separate project)
 
-https://biocoin.blackithart.com — восстановленный публичный сайт 2018 года. Блокчейном он не является. Исходники сайта в **этот** репозиторий класть не нужно.
+https://biocoin.blackithart.com is a separate public site. It is not the blockchain. Do not put the site sources in **this** repository.
 
-## Лицензия
+## License
 
-MIT/X11, см. `COPYING`. Историческая основа — Bitcoin / PPCoin / NovaCoin.
+MIT/X11, see `COPYING`. Historical base is Bitcoin / PPCoin / NovaCoin.
