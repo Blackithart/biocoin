@@ -35,6 +35,9 @@ fi
     if [ -n "${BIOCOIN_EXTERNAL_IP:-}" ]; then
         echo "externalip=${BIOCOIN_EXTERNAL_IP}"
     fi
+    if [ -n "${BIOCOIN_ADDNODE:-}" ]; then
+        echo "addnode=${BIOCOIN_ADDNODE}"
+    fi
 } > "${CONF}"
 
 WALLET="${DATADIR}/wallet.dat"
