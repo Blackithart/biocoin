@@ -49,7 +49,7 @@ if [ -f "${RESTORE}" ]; then
     fi
     mv "${RESTORE}" "${WALLET}"
     chmod 600 "${WALLET}" || true
-    EXTRA_ARGS="-rescan"
+    EXTRA_ARGS="${EXTRA_ARGS} -rescan"
 fi
 
 # shellcheck disable=SC2086
