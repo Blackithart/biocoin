@@ -51,7 +51,7 @@ Not present:
 - An external peer network. Observed connections are between the two Railway nodes. YoBit was a possible remaining venue or peer lead; outreach received no reply.
 - Full sync from empty genesis: `GetTotalBlocksEstimate()` uses the last hardened checkpoint (**170000**). **Do not disable checkpoints.**
 
-Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, `moneysupply ≈ 818600206 BIO`, `connections: 3` (all to the second node). The second node was at 115365 at that time. If RPC is unavailable, treat **115366 as last observed**.
+Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, tip time **2018-03-29**, `moneysupply ≈ 818600206 BIO`, `connections: 3–4` (all to the second Railway node). The second node was at 115365. Checkpoints through **112342** match the live tip; **130000+** are missing. DNS seeds and hardcoded `pnSeed` peers did not resolve/respond in read-only probes. If RPC is unavailable, treat **115366 as last observed**.
 
 ## How to continue
 

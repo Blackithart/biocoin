@@ -38,13 +38,22 @@ Project id `2ff03dc3-90c6-4931-a46d-ae8ba13541e8`, environment `production`.
 | `biocoin-peer` | `altaria.proxy.rlwy.net:45218` | last observed height **115366**, moneysupply ≈ 818.6M BIO |
 | `biocoin-peer-2` | `altaria.proxy.rlwy.net:22792` | `BIOCOIN_ADDNODE=altaria.proxy.rlwy.net:45218` |
 
-Observed `getinfo` on 2026-09-09 via `railway ssh`:
+Observed `getinfo` on 2026-09-09 via `railway ssh` (re-checked later the same day):
 
-- `biocoin-peer`: `blocks` 115366, `moneysupply` 818600206.73485589, `connections` 3, `testnet` false.
-- `biocoin-peer-2`: `blocks` 115365 (still catching the first node).
-- `getpeerinfo` on the first node showed only the second Railway node (public TCP and private overlay), user agent `/BioCoin:1.0.1.2/`. No external historical peer.
+- `biocoin-peer`: `blocks` 115366, tip hash `0553d020…ef60`, tip time **2018-03-29** (`1522360302`), `moneysupply` 818600206.73485589, `connections` 3–4, `testnet` false, sync-checkpoint policy **strict** (sync checkpoint still at genesis).
+- `biocoin-peer-2`: `blocks` 115365, `connections` 3 (only the first Railway node / overlay).
+- `getpeerinfo`: only `/BioCoin:1.0.1.2/` peers inside the Railway pair. No external historical peer.
+- Hardened checkpoints **0 … 112342** on the live tip match `src/checkpoints.cpp`. Height **130000** is out of range (`Block number out of range`). Next compiled checkpoints are 130000 / 150000 / **170000**.
 
 The two nodes can replicate **what they already have**. They cannot invent blocks after 115366.
+
+### Probe notes (2026-09-09, read-only)
+
+- DNS seeds in `src/net.cpp` (`dnsseed.biocoin.help`, `dns1`–`dns5.seedbiocoin.ru`): **no A/AAAA records**.
+- Hardcoded `pnSeed[]` IPs: TCP **24885** timed out / unreachable in a short sample.
+- Public Railway P2P proxies accept TCP: `altaria.proxy.rlwy.net:45218` and `:22792`.
+- Wayback: marketing pages for `biocoin.org` / `www.biocoin.org` exist; **no** archived `bootstrap.dat` / `blk*.dat` found in CDX probes tried here.
+- YoBit public API still lists `bio_*` markets. Order books exist; recent trade timestamps appear on the public trades endpoint (exchange ledger activity). That is **not** proof of a live BIO P2P peer past height 115366.
 
 ### Wallet
 
