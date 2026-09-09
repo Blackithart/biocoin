@@ -37,6 +37,22 @@ fi
     fi
 } > "${CONF}"
 
+WALLET="${DATADIR}/wallet.dat"
+RESTORE="${DATADIR}/wallet.dat.restore"
+EXTRA_ARGS=""
+
+# One-shot restore: copy a replacement wallet onto the volume, then restart.
+# The incoming file is renamed so this does not re-run on later restarts.
+if [ -f "${RESTORE}" ]; then
+    if [ -f "${WALLET}" ]; then
+        mv "${WALLET}" "${WALLET}.bak-$(date +%s)"
+    fi
+    mv "${RESTORE}" "${WALLET}"
+    chmod 600 "${WALLET}" || true
+    EXTRA_ARGS="-rescan"
+fi
+
+# shellcheck disable=SC2086
 exec BioCoind \
     -datadir="${DATADIR}" \
     -printtoconsole \
@@ -44,4 +60,5 @@ exec BioCoind \
     -server=1 \
     -listen=1 \
     -port="${P2P_PORT}" \
+    ${EXTRA_ARGS} \
     "$@"
