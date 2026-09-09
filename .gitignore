@@ -22,3 +22,12 @@ qrc_*.cpp
 build
 
 !src/leveldb/Makefile
+
+# Never commit wallets, dumps, keys, or chain data
+wallet.dat
+wallet.dat.*
+*.dat.restore
+dumpwallet*
+bootstrap.dat
+blk*.dat
+
