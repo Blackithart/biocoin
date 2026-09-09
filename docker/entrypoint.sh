@@ -39,7 +39,7 @@ fi
 
 WALLET="${DATADIR}/wallet.dat"
 RESTORE="${DATADIR}/wallet.dat.restore"
-EXTRA_ARGS=""
+EXTRA_ARGS="${BIOCOIN_EXTRA_ARGS:-}"
 
 # One-shot restore: copy a replacement wallet onto the volume, then restart.
 # The incoming file is renamed so this does not re-run on later restarts.
