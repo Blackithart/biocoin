@@ -4,15 +4,19 @@ BioCoin node setup
 This is the BioCoin daemon (BioCoind), ticker BIO.
 P2P port 24885, RPC port 24889, magic b4 f9 e1 a5.
 
-A public peer from the 2026 revival (last observed height 115366) is:
+A public peer from the 2026 revival (last observed height 115366,
+tip hash 0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60) is:
 
     addnode=altaria.proxy.rlwy.net:45218
 
 That peer does not have the chain past 115366. Hardened checkpoints in
 src/checkpoints.cpp go to block 170000. A new node will not fully sync
 from genesis against these peers. Do not disable checkpoints.
+No live external BIO peer or downloadable blk/bootstrap past 115366 was
+found in the 2026-09-09 search. Keep the Railway island online.
 A live exchange node (for example YoBit, if they still run BIO) would
-still help, but outreach so far received no reply.
+still help, but outreach so far received no reply. Other human leads:
+Telegram @biocoinchat_ru / @biocoinchat, former operators.
 See README.md and doc/revival-2026.md.
 
 Minimum Ubuntu (14.04 x64) notes below are historical. On Ubuntu 24.04

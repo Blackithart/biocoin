@@ -13,7 +13,7 @@ BioCoin is a NovaCoin/Peercoin-style proof-of-stake coin.
 | Protocol | `90000` |
 | Config | `~/.BioCoin/BioCoin.conf` (directory name is case-sensitive) |
 
-**Revival (2026), short status.** The daemon was made to build on current Linux (OpenSSL 3 / Boost) and two Railway peer nodes were brought online. They talk to each other. The chain they share stops at last observed height **115366** (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A genesis-only node cannot pass that checkpoint. The original operator (Artem Kalinin / Blackithart) has **no more** `blk` files, peers, or backups to provide. Continuation needs authentic `blk*.dat` / `bootstrap.dat` past 115366 (ideally past 170000) and/or an external live BIO peer. Some on-exchange activity related to BIO was noticed on YoBit; the revival effort tried to contact YoBit and received no reply.
+**Revival (2026), short status.** The daemon builds on current Linux (OpenSSL 3 / Boost). Two Railway peer nodes talk to each other on an island tip at height **115366**, hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60` (moneysupply about **818.6M BIO**, 2026-09-09). Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). A deep peer/search pass found **no** live external BIO peer and **no** downloadable `blk` / `bootstrap` past 115366. DNS seeds are empty; all `pnSeed[]` IPs are dead on `:24885`; `n001`–`n013.biocoin.pro` are NXDOMAIN. Wayback Machine explorer JSON shows the chain once continued well past 115366 (through checkpoint 170000 and up to ~260k by 2019) — historical proof only, not a block download source. The Blackithart GitHub account has no chain data (releases are Qt wallets only). The original operator has **no more** `blk` files, peers, or backups. YoBit still lists BIO markets publicly; outreach received no reply. Continuation needs authentic blocks past 115366 (ideally past 170000) or a live peer. Do not strip checkpoints; keep the Railway island.
 
 Marketing site (not this repo, not the blockchain): https://biocoin.blackithart.com
 
@@ -42,24 +42,31 @@ Working:
 
 - `BioCoind` builds on current Linux (after OpenSSL 3 / Boost patches; see related PRs).
 - Docker image and Railway peer-node deploy.
-- Two Railway nodes, connected to each other, shared height about **115366**.
+- Two Railway nodes, connected to each other, shared height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`.
 - Site https://biocoin.blackithart.com (separate from this repository).
 
 Not present:
 
-- Historical chain **after 115366** (through checkpoint 170000 and beyond).
-- An external peer network. Observed connections are between the two Railway nodes. YoBit was a possible remaining venue or peer lead; outreach received no reply.
+- Historical chain **after 115366** (through checkpoint 170000 and beyond) as downloadable `blk` / `bootstrap`.
+- An external peer network. Observed connections are between the two Railway nodes only.
 - Full sync from empty genesis: `GetTotalBlocksEstimate()` uses the last hardened checkpoint (**170000**). **Do not disable checkpoints.**
 
-Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, tip time **2018-03-29**, `moneysupply ≈ 818600206 BIO`, `connections: 3–4` (all to the second Railway node). The second node was at 115365. Checkpoints through **112342** match the live tip; **130000+** are missing. DNS seeds and hardcoded `pnSeed` peers did not resolve/respond in read-only probes. If RPC is unavailable, treat **115366 as last observed**.
+Search findings (2026-09-09), short:
+
+- No live external BIO peer; no downloadable chain past 115366.
+- All DNS seeds empty; all `pnSeed[]` dead on `:24885`; `n001`–`n013.biocoin.pro` NXDOMAIN.
+- YoBit BIO markets still public; no node/height/deposit-node info; prior outreach silent.
+- Wayback archived `block-explorer.biocoin.bio` JSON shows past heights well above 115366 (e.g. 116391, 144499, 169896, **170701**, ~259550–260725 by Mar 2019). Not a download source; checkpoint hashes were not archived for verification.
+- Blackithart GitHub public repos scanned; only `biocoin` / `biocoin_nbv` relevant; no chain dumps; releases are Qt wallets only.
+- Shodan/Censys unavailable without API.
+
+Last RPC figures (2026-09-09, `getinfo` over SSH on Railway): node `biocoin-peer` — `blocks: 115366`, tip hash above, tip time **2018-03-29**, `moneysupply ≈ 818600206 BIO`, `connections: 3–4` (all to the second Railway node). The second node was at 115365. Checkpoints through **112342** match the live tip; **130000+** are missing. If RPC is unavailable, treat **115366 as last observed**.
 
 ## How to continue
 
-Concrete steps if you have chain data or a live peer:
-
 1. Obtain **authentic** BioCoin `blk*.dat` and/or `bootstrap.dat` that cover height **after 115366**, preferably **after checkpoint 170000**. Do not load foreign block databases or foreign wallets.
-2. Look for a live P2P peer that speaks magic **`b4 f9 e1 a5`** on port **24885** (old nodes, exchanges, archives). Connect with `addnode`. A live exchange node (for example YoBit, if they still run BIO) would still help, but outreach so far received no reply.
-3. Run a node from this repository (Docker or `makefile.unix`). Example peer: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints** (`-cppolicy` / permissive) to “skip” 170000 — that breaks verification of known history.
+2. Look for a live P2P peer that speaks magic **`b4 f9 e1 a5`** on port **24885**. Human outreach leads that remain open: YoBit (no reply so far), Telegram `@biocoinchat_ru` / `@biocoinchat`, former operators.
+3. Run a node from this repository (Docker or `makefile.unix`). Example peer: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints** to “skip” 170000. Keep the Railway island online.
 4. The website is independent: https://biocoin.blackithart.com — it is not in this git tree.
 5. A local wallet can be used with the node. **Never commit** wallets, keys, or private backups.
 
