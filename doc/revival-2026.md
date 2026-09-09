@@ -55,6 +55,23 @@ The two nodes can replicate **what they already have**. They cannot invent block
 - Wayback: marketing pages for `biocoin.org` / `www.biocoin.org` exist; **no** archived `bootstrap.dat` / `blk*.dat` found in CDX probes tried here.
 - YoBit public API still lists `bio_*` markets. Order books exist; recent trade timestamps appear on the public trades endpoint (exchange ledger activity). That is **not** proof of a live BIO P2P peer past height 115366.
 
+### Internet sweep (2026-09-09) — peers past 115366
+
+**No live external BIO peer past height 115366 was found.** Re-checked Railway: tip still **115366**, hash `0553d020…ef60`, only `/BioCoin:1.0.1.2/` island peers. All 28 unique `pnSeed[]` IPs + DNS seeds closed on 24885; alternate seeds `n001`–`n013.biocoin.pro` (from `biocoin/biocoin` / `biocoin_nbv`) are NXDOMAIN. No Shodan/Censys API in this environment (web snippets only).
+
+**Historical evidence (not downloadable chain):** Wayback Machine archived Iquidus explorer `block-explorer.biocoin.bio` JSON. Examples that are **above** the Railway tip and chronologically consistent with checkpoints:
+
+| archive date | source | height | note |
+| --- | --- | --- | --- |
+| 2018-04-07 | `/api/getblock` | **116391** | PoS; past tip 115366 |
+| 2018-06-08 | `/ext/summary` | **144499** | between ckpt 130000 and 150000 |
+| 2018-08-07 | `/ext/summary` | **169896** | just before ckpt 170000 (2018-08-08) |
+| 2018-08-16 | `/api/getblock` | **170701** | hash `e7343889…5a17`; past ckpt 170000 |
+| 2018-12-12 | `/ext/summary` | **222725** | |
+| 2019-03-10 | `/ext/summary` | **259550** | supply ≈846.4M (CMC total supply ≈845.8M matches this era) |
+
+Compiled-in checkpoint **hashes** for 130000 / 150000 / 170000 were **not** found as archived explorer URLs, so hash-level match/mismatch against those three checkpoints could not be confirmed from the archive alone. No `bootstrap.dat` / `blk*.dat` / torrent turned up.
+
 ### Wallet
 
 A local wallet can be used with the node. Wallets and keys must never be committed.
