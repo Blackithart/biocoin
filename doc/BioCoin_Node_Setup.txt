@@ -1,8 +1,21 @@
-Minimum VPS requirements:
-- Ubuntu (14.04 x64)
-- 1 Gb ram
-- 20 Gb disk space
-- 1 vCore CPU
+BioCoin node setup
+==================
+
+This is the BioCoin daemon (BioCoind), ticker BIO.
+P2P port 24885, RPC port 24889, magic b4 f9 e1 a5.
+
+A public peer from the 2026 revival (last observed height 115366) is:
+
+    addnode=altaria.proxy.rlwy.net:45218
+
+That peer does not have the chain past 115366. Hardened checkpoints in
+src/checkpoints.cpp go to block 170000. A new node will not fully sync
+from genesis against these peers. Do not disable checkpoints.
+See README.md and doc/revival-2026.md.
+
+Minimum Ubuntu (14.04 x64) notes below are historical. On Ubuntu 24.04
+use libssl-dev / libdb++-dev / libboost-all-dev as in README.md; OpenSSL 3
+needs the Linux-build patches (separate PR), not libssl1.0-dev.
 
 
 Set up a swapfile if your system has less than 1.5GB of memory:
@@ -22,13 +35,13 @@ Add this at the bottom: /swapfile none swap sw 0 0
 Install all required dependencies:
 
 apt-get update && apt-get upgrade
-apt-get install ntp unzip git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev aptitude && aptitude install miniupnpc libminiupnpc-dev libssl1.0-dev
+apt-get install ntp unzip git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev aptitude && aptitude install miniupnpc libminiupnpc-dev
 
 Pull the source code from github, or upload it yourself:
 
 git clone https://github.com/Blackithart/biocoin
 
-cd /biocoin/src
+cd biocoin/src
 make -f makefile.unix
 
 Strip the file to make it smaller, then relocate it:
@@ -48,8 +61,20 @@ Add the following, save and exit:
 
 daemon=1
 server=1
+listen=1
 rpcuser=(username)
 rpcpassword=(strong password)
+port=24885
+rpcport=24889
+addnode=altaria.proxy.rlwy.net:45218
 
-Run BioCoind once more and if you did everything correctly, your daemon is now online!
-Type BioCoind help for a full list of commands available. 
+Run BioCoind once more. Type BioCoind help for a full list of commands.
+
+Join the live peer with:
+
+BioCoind addnode altaria.proxy.rlwy.net:45218 add
+
+RPC port: 24889
+Network port: 24885
+
+Do not commit wallet.dat, dumpwallet files, or keys.
