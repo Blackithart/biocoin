@@ -1,8 +1,4 @@
-Minimum VPS requirements:
-- Ubuntu (14.04 x64)
-- 1 Gb ram
-- 20 Gb disk space
-- 1 vCore CPU
+Minimum Ubuntu (14.04 x64)
 
 
 Set up a swapfile if your system has less than 1.5GB of memory:
@@ -22,13 +18,13 @@ Add this at the bottom: /swapfile none swap sw 0 0
 Install all required dependencies:
 
 apt-get update && apt-get upgrade
-apt-get install ntp unzip git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev aptitude && aptitude install miniupnpc libminiupnpc-dev libssl1.0-dev
+apt-get install ntp unzip git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev aptitude && aptitude install miniupnpc libminiupnpc-dev
 
 Pull the source code from github, or upload it yourself:
 
 git clone https://github.com/Blackithart/biocoin
 
-cd /biocoin/src
+cd biocoin/src
 make -f makefile.unix
 
 Strip the file to make it smaller, then relocate it:
@@ -48,8 +44,17 @@ Add the following, save and exit:
 
 daemon=1
 server=1
+listen=1
 rpcuser=(username)
 rpcpassword=(strong password)
+port=24885
+rpcport=24889
+addnode=altaria.proxy.rlwy.net:45218
 
 Run BioCoind once more and if you did everything correctly, your daemon is now online!
-Type BioCoind help for a full list of commands available. 
+Type BioCoind help for a full list of commands available.
+
+RPC port: 24889
+Network port: 24885
+
+On current Ubuntu (24.04), use libssl-dev / libdb++-dev / libboost-all-dev as in README.md; the tree includes OpenSSL 3 compatibility. A public BioCoin peer is already running at altaria.proxy.rlwy.net:45218.
