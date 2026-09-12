@@ -27,7 +27,7 @@ Nodes were built and two Railway peers talk to each other. The chain stops at he
 
 - OpenSSL 3 and current Boost patches so `makefile.unix` builds on Ubuntu 24.04.
 - `Dockerfile` (multi-stage Ubuntu 24.04 → `BioCoind`), `docker/entrypoint.sh`, `railway.toml`.
-- Related PRs on this GitHub repo: Linux/OpenSSL3/Boost + Docker/Railway; `BIOCOIN_ADDNODE` / docs. They may still be unmerged when you read this.
+- Linux/OpenSSL3/Boost + Docker/Railway and `BIOCOIN_ADDNODE` / wallet-restore entrypoint are on `master`.
 
 ### Live peers (Railway project `biocoin-peer`)
 
@@ -115,7 +115,7 @@ Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `
 
 1. Obtain authentic BioCoin block files covering **at least past 115366**, preferably **past checkpoint 170000**. `bootstrap.dat` is useful if it is BIO magic `b4 f9 e1 a5` and actually contains that range.
 2. Find any remaining live P2P peer (exchanges, old VPS, archived nodes) that still speaks BIO on port 24885 with that magic. Human outreach leads: YoBit (activity noticed, contact attempted, no reply), Telegram `@biocoinchat_ru` / `@biocoinchat`, former operators.
-3. Run the Docker/Railway node from this repo (or `makefile.unix` after the Linux patches). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on. Keep the Railway island.
+3. Run the Docker/Railway node from this repo (or `makefile.unix`). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on. Keep the Railway island.
 4. Never load foreign wallets or foreign block databases onto a BIO node. Wrong magic / wrong genesis will not become BioCoin by renaming files.
 5. Website work stays at https://biocoin.blackithart.com — independent of this C++ tree.
 6. Never commit wallets or keys.

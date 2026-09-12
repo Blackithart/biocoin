@@ -23,7 +23,7 @@ Details: [`doc/revival-2026.md`](doc/revival-2026.md). How to run a node: [`doc/
 
 What was done:
 
-1. The source was brought up to build on current Linux (OpenSSL 3, Boost). A Docker image and Railway config were added. That work lives in separate PRs on this repository (Linux/Docker and peer-node deploy) and may not yet be on `master`.
+1. The source was brought up to build on current Linux (OpenSSL 3, Boost). A Docker image and Railway config are in this tree (`Dockerfile`, `docker/entrypoint.sh`, `railway.toml`).
 2. Two public peer nodes were brought up in the Railway project `biocoin-peer` (production):
    - `biocoin-peer` — `altaria.proxy.rlwy.net:45218`
    - `biocoin-peer-2` — `altaria.proxy.rlwy.net:22792` (`BIOCOIN_ADDNODE=altaria.proxy.rlwy.net:45218`)
@@ -40,7 +40,7 @@ The original operator confirmed there is **no more data** — no remaining blk f
 
 Working:
 
-- `BioCoind` builds on current Linux (after OpenSSL 3 / Boost patches; see related PRs).
+- `BioCoind` builds on current Linux (OpenSSL 3 / Boost patches are on `master`).
 - Docker image and Railway peer-node deploy.
 - Two Railway nodes, connected to each other, shared height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`.
 - Site https://biocoin.blackithart.com (separate from this repository).
@@ -87,7 +87,7 @@ make -f makefile.unix
 strip BioCoind
 ```
 
-Ubuntu 22.04/24.04 ship OpenSSL 3 and Boost 1.74+. On `master` without the compatibility patches, an OpenSSL 3 build typically fails. Patches and Docker are in the Linux-build / Railway-node PRs on this repository.
+Ubuntu 22.04/24.04 ship OpenSSL 3 and Boost 1.74+. Compatibility patches for those libraries are on `master`.
 
 Qt wallet: `doc/readme-qt.rst`. QR codes are optional: `libqrencode-dev` and `qmake USE_QRCODE=1`.
 
@@ -112,7 +112,7 @@ An empty node **will not** catch checkpoint 170000 until there are blocks after 
 
 ### Docker and Railway
 
-`Dockerfile`, `docker/entrypoint.sh`, and `railway.toml` land with the Linux/Docker PRs (they may not be on current `master`). When they are in the tree:
+`Dockerfile`, `docker/entrypoint.sh`, and `railway.toml` are in this tree:
 
 ```
 docker build -t biocoin-peer .
