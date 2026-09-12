@@ -947,6 +947,10 @@ static const char *strDNSSeed[][2] = {
   {"dns5.seedbiocoin.ru", "dns5.seedbiocoin.ru"},
   {"", ""}
 };
+// n001–n013.biocoin.pro were the 1.0.2 / biocoin_nbv DNS seeds (NETTRASH, 2018–2019).
+// Rechecked 2026-09-12: NXDOMAIN (no A/AAAA). They are NOT compiled in.
+// An expired seed hostname is a hijack path if anyone re-registers it; old 1.0.2
+// binaries would trust the new A records. Keep the 1.0.1.2 list above.
 
 void ThreadDNSAddressSeed(void* parg)
 {

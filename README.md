@@ -25,7 +25,8 @@ This is where things stand. Nothing further will be built from this side.
   - `altaria.proxy.rlwy.net:45218`
   - `altaria.proxy.rlwy.net:22792`
 - Both advertise height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Last observed tip time is **2018-03-29**. Moneysupply last seen on RPC was about **818.6M BIO**.
-- There is **no** external peer network. The two Railway nodes only see each other. DNS seeds are empty. Hardcoded `pnSeed[]` IPs are dead on `:24885`. `n001`–`n013.biocoin.pro` are NXDOMAIN.
+- There is **no** external peer network. The two Railway nodes only see each other. DNS seeds are empty. Hardcoded `pnSeed[]` IPs are dead on `:24885`. `n001`–`n013.biocoin.pro` (the 1.0.2 / `biocoin_nbv` names) are NXDOMAIN and are **not** compiled in: an expired seed is a hijack path.
+- The second public tree `biocoin_nbv` (NETTRASH **1.0.2.17**, 2018–2019) was collapsed into this repo on 2026-09-12. Same magic, protocol `90000`, checkpoints through 170000, same dead `pnSeed[]`. No `blk` / bootstrap / wallets. Unique bits taken: Qt `uBTC,` comma and OSX dmg backgrounds. Client stays **1.0.1.2**. Full nbv history is `archive/nbv-1.0.2` + tag `v1.0.2`. Details: [`doc/nbv-collapse-2026.md`](doc/nbv-collapse-2026.md).
 - Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). The live island stops at **115366**. There is no downloadable `blk*.dat` / `bootstrap.dat` past that height. Wayback Machine explorer JSON shows the chain once continued through checkpoint 170000 and up to ~260k by 2019. That is historical proof only, not a download source.
 - The original operator has **no more** `blk` files, peers, or backups. Blackithart GitHub releases are Qt wallets only.
 - YoBit still lists `bio_*` markets. Last `bio_btc` trade seen was 2026-01-04. Volume on a 2026-09-12 check was **0**. Price sits at the 1-satoshi floor. Outreach got no reply.
@@ -98,6 +99,30 @@ Record stays public. Work from this side stops here.
 
 **[info@blackithart.com](mailto:info@blackithart.com)**
 
+## What we tried with the second source tree (English)
+
+We compared this repository with the other public BioCoin tree, [`biocoin_nbv`](https://github.com/Blackithart/biocoin_nbv). That tree is NETTRASH's **1.0.2.17** client from 2018–2019, not a second blockchain.
+
+What we found:
+
+- Same network: magic `b4 f9 e1 a5`, protocol `90000`, hardened checkpoints through **170000**, the same dead `pnSeed[]` list.
+- Neither tree has `blk*.dat`, `bootstrap.dat`, or wallets. A second compiler is not a second copy of the blocks.
+- `nbv` “fix -seednode” only swapped hostnames to `n001`–`n013.biocoin.pro`. Rechecked **2026-09-12**: still no A/AAAA (NXDOMAIN). Those names are **not** compiled into this tree. Expired seeds are a hijack path if anyone re-registers them.
+- Unique pieces worth keeping: the Qt `seeds` comma in `src/qt/bitcoinunits.h`, and the OSX dmg art under `contrib/macdeploy/`. Client version stays **1.0.1.2** so Railway `/BioCoin:1.0.1.2/` peers do not change. OpenSSL 3 stays. Full nbv history is archived here as `archive/nbv-1.0.2` (tag `v1.0.2`).
+
+NETTRASH still shipping a client into January 2019 makes the hole after height **115366** clearer, not smaller. Checkpoint **170000** is now confirmed by two maintainer trees. That does not download the missing blocks.
+
+Write-up: [`doc/nbv-collapse-2026.md`](doc/nbv-collapse-2026.md).
+
+### LLM council after collapse (2026-09-12)
+
+Second pass of the same council (Claude Opus, GPT, Gemini, Muse) after the trees were compared and `nbv` was archived:
+
+- Hard stop does **not** change. Same chain, two dead DNS lists, zero new blocks. 1.0.2.17 is a client label.
+- **New:** NETTRASH shipped into January 2019, so the hole after 115366 is clearer, not smaller. Checkpoint 170000 is dual-maintainer confirmed.
+- **Warning:** old seed hostnames can be re-registered and trusted by old binaries.
+- **This side:** nothing further on recovery.
+
 ## Revival work that was done (2026)
 
 1. The source builds on current Linux (OpenSSL 3, Boost). Docker and Railway config are in this tree (`Dockerfile`, `docker/entrypoint.sh`, `railway.toml`).
@@ -105,6 +130,7 @@ Record stays public. Work from this side stops here.
 3. A local wallet can be used with the node. Wallets and keys **must never be committed**.
 4. The old public site was restored separately at **https://biocoin.blackithart.com**.
 5. YoBit was contacted; there was no response.
+6. `biocoin_nbv` was fetched and archived as `archive/nbv-1.0.2` (tag `v1.0.2`). Unique 1.0.2 pieces (Qt `seeds` comma, OSX dmg backgrounds) are in this tree. The 1.0.2 DNS names stay out. Client version stays `1.0.1.2`. See [`doc/nbv-collapse-2026.md`](doc/nbv-collapse-2026.md).
 
 What was not recovered: **the chain after height 115366.**
 

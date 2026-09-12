@@ -30,6 +30,7 @@ Nodes were built and two Railway peers talk to each other. The chain stops at he
 - OpenSSL 3 and current Boost patches so `makefile.unix` builds on Ubuntu 24.04.
 - `Dockerfile` (multi-stage Ubuntu 24.04 → `BioCoind`), `docker/entrypoint.sh`, `railway.toml`.
 - Linux/OpenSSL3/Boost + Docker/Railway and `BIOCOIN_ADDNODE` / wallet-restore entrypoint are on `master`.
+- 2026-09-12: `biocoin_nbv` collapsed (Qt comma + OSX dmg only; 1.0.2 seeds commented, not compiled). Archive branch `archive/nbv-1.0.2`, tag `v1.0.2`. Client stays `1.0.1.2` / OpenSSL 3. See [`nbv-collapse-2026.md`](nbv-collapse-2026.md).
 
 ### Live peers (Railway project `biocoin-peer`)
 
@@ -93,7 +94,7 @@ Public repos under the account: `biocoin`, `biocoin_nbv`, `neiro`, `kuburan`, `p
 | --- | --- |
 | `blk*.dat` / `bootstrap.dat` in account | **none** |
 | wallet dumps / peer DBs | **none** |
-| `biocoin_nbv` | mirrors same checkpoints / magic; dead DNS `n001`–`n013.biocoin.pro` |
+| `biocoin_nbv` | **collapsed 2026-09-12.** Same chain (magic, protocol `90000`, checkpoints through 170000, same `pnSeed[]`). NETTRASH 1.0.2.17 client, last unique code Jan 2019. No `blk` / bootstrap / wallets. Unique bits taken: Qt `uBTC,` comma, OSX dmg backgrounds. `n001`–`n013.biocoin.pro` rechecked **NXDOMAIN** 2026-09-12 and **not compiled in** (expired seed = hijack path). Full history: branch `archive/nbv-1.0.2` + tag `v1.0.2`. Write-up: [`nbv-collapse-2026.md`](nbv-collapse-2026.md). |
 | GitHub Releases | **Qt wallets only**, not chain data |
 
 ## Wallet

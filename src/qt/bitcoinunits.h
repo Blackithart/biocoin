@@ -20,7 +20,7 @@ public:
     {
         BTC,
         mBTC,
-        uBTC
+        uBTC,
         seeds
     };
 

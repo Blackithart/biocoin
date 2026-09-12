@@ -750,6 +750,9 @@ bool AppInit2()
                 AddOneShot(string("dns3.seedbiocoin.ru"));
                 AddOneShot(string("dns4.seedbiocoin.ru"));
                 AddOneShot(string("dns5.seedbiocoin.ru"));
+    // biocoin_nbv "fix -seednode" (c452e50) only swapped these AddOneShot hostnames
+    // to n001–n013.biocoin.pro. Keep the 1.0.1.2 one-shots. Do not compile n001–n013:
+    // they are NXDOMAIN as of 2026-09-12; expired seeds are a hijack path.
     // ********************************************************* Step 7: load blockchain
 
     if (!bitdb.Open(GetDataDir()))
