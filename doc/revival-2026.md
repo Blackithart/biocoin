@@ -2,6 +2,8 @@
 
 Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next person does not repeat the same dead ends. This file is a record, not a roadmap with hidden data.
 
+**We cannot take this further. We do not have the capabilities** (no chain after 115366, no merchants, no card/bank stack, no resources to rebuild the 2017 product). Public reflections, current affairs, and contact: [README.md](../README.md). If this is useful to you: [info@blackithart.com](mailto:info@blackithart.com).
+
 Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Checkpoints require **170000**. A 2026-09-09 internet + GitHub-account search found **no** live external BIO peer and **no** downloadable `blk` / `bootstrap` past that height. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past 115366 (ideally past 170000) or a live external BIO peer. Do not strip checkpoints; keep the Railway island. YoBit still lists BIO markets; contact attempts received no reply.
 
 ## What this tree is
@@ -111,7 +113,7 @@ Do not copy the site sources into https://github.com/Blackithart/biocoin.
 
 Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `blk*.dat`, no extra peers to introduce, no backups. Treat that as a fact. Future work does not wait on the original team.
 
-## How to continue
+## If someone else continues
 
 1. Obtain authentic BioCoin block files covering **at least past 115366**, preferably **past checkpoint 170000**. `bootstrap.dat` is useful if it is BIO magic `b4 f9 e1 a5` and actually contains that range.
 2. Find any remaining live P2P peer (exchanges, old VPS, archived nodes) that still speaks BIO on port 24885 with that magic. Human outreach leads: YoBit (activity noticed, contact attempted, no reply), Telegram `@biocoinchat_ru` / `@biocoinchat`, former operators.
