@@ -23,7 +23,11 @@ build
 
 !src/leveldb/Makefile
 
-# Never commit wallet backups or chain data
+# Never commit wallets, dumps, keys, or chain data
 wallet.dat
 wallet.dat.*
 *.dat.restore
+dumpwallet*
+bootstrap.dat
+blk*.dat
+

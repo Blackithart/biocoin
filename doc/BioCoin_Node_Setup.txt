@@ -1,4 +1,27 @@
-Minimum Ubuntu (14.04 x64)
+BioCoin node setup
+==================
+
+This is the BioCoin daemon (BioCoind), ticker BIO.
+P2P port 24885, RPC port 24889, magic b4 f9 e1 a5.
+
+A public peer from the 2026 revival (last observed height 115366,
+tip hash 0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60) is:
+
+    addnode=altaria.proxy.rlwy.net:45218
+
+That peer does not have the chain past 115366. Hardened checkpoints in
+src/checkpoints.cpp go to block 170000. A new node will not fully sync
+from genesis against these peers. Do not disable checkpoints.
+No live external BIO peer or downloadable blk/bootstrap past 115366 was
+found in the 2026-09-09 search. Keep the Railway island online.
+A live exchange node (for example YoBit, if they still run BIO) would
+still help, but outreach so far received no reply. Other human leads:
+Telegram @biocoinchat_ru / @biocoinchat, former operators.
+See README.md and doc/revival-2026.md.
+
+Minimum Ubuntu (14.04 x64) notes below are historical. On Ubuntu 24.04
+use libssl-dev / libdb++-dev / libboost-all-dev as in README.md; OpenSSL 3
+needs the Linux-build patches (separate PR), not libssl1.0-dev.
 
 
 Set up a swapfile if your system has less than 1.5GB of memory:
@@ -51,10 +74,13 @@ port=24885
 rpcport=24889
 addnode=altaria.proxy.rlwy.net:45218
 
-Run BioCoind once more and if you did everything correctly, your daemon is now online!
-Type BioCoind help for a full list of commands available.
+Run BioCoind once more. Type BioCoind help for a full list of commands.
+
+Join the live peer with:
+
+BioCoind addnode altaria.proxy.rlwy.net:45218 add
 
 RPC port: 24889
 Network port: 24885
 
-On current Ubuntu (24.04), use libssl-dev / libdb++-dev / libboost-all-dev as in README.md; the tree includes OpenSSL 3 compatibility. A public BioCoin peer is already running at altaria.proxy.rlwy.net:45218.
+A local wallet can be used with the node. Wallets and keys must never be committed.
