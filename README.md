@@ -21,6 +21,8 @@ Marketing site (not this repo, not the blockchain): https://biocoin.blackithart.
 
 This is where things stand. Nothing further will be built from this side.
 
+**Railway hold:** the two public peers stay up for **one year from today**, through **2027-09-12**. That is an archive window, not a revival. After that date they go off unless someone else takes the hosting. Enthusiasm is welcome: [info@blackithart.com](mailto:info@blackithart.com). Final council: [`doc/final-council-2026.md`](doc/final-council-2026.md).
+
 - Two Railway peers still speak BioCoin `1.0.1.2` (magic `b4 f9 e1 a5`, protocol `90000`):
   - `altaria.proxy.rlwy.net:45218`
   - `altaria.proxy.rlwy.net:22792`
@@ -43,9 +45,9 @@ Technical revival notes: [`doc/revival-2026.md`](doc/revival-2026.md). How to ru
 
 There are no remaining chain files after 115366, no live historical peer, no merchant network, no card program, no licensed bank stack, and no mandate or resources to rebuild the 2017 product (loyalty SaaS, cobrand cards, a new L1/L2 token, Mastercard/Visa worldwide, an exchange, or an ICO platform).
 
-This repository stays as a public record of the node source and of the 2026 revival attempt. The Railway island may stay up as an archive. It is not a path to “finish” BioCoin.
+This repository stays as a public record of the node source and of the 2026 revival attempt. The Railway island stays up as an archive until **2027-09-12**. It is not a path to “finish” BioCoin.
 
-If someone else has authentic blocks past 115366, a live peer with this magic, or a reason to reuse the idea, they can do that work themselves.
+If someone else has authentic blocks past 115366, a live peer with this magic, or a reason to reuse the idea, they can do that work themselves. Enthusiasm is welcome.
 
 **Contact:** [info@blackithart.com](mailto:info@blackithart.com)
 
@@ -95,7 +97,7 @@ Independent notes from Claude Opus, GPT, Gemini, and Muse, then a chairman synth
 
 Another chain gives tools, not revenue. TalkBank packaged the only consumer-facing piece in 2018; it did not make the ICO true. This side **cannot** implement the promised platform, restore the missing chain, or stand up a bank/card/token business.
 
-Record stays public. Work from this side stops here.
+Record stays public. Work from this side stops here. Railway stay-up and the last council are below.
 
 **[info@blackithart.com](mailto:info@blackithart.com)**
 
@@ -123,6 +125,23 @@ Second pass of the same council (Claude Opus, GPT, Gemini, Muse) after the trees
 - **Warning:** old seed hostnames can be re-registered and trusted by old binaries.
 - **This side:** nothing further on recovery.
 
+### Final LLM council (2026-09-12)
+
+Third and last pass of the same council on the **whole** case (L1, product, chain, marketing, nbv, YoBit, what to host). Full write-up: [`doc/final-council-2026.md`](doc/final-council-2026.md).
+
+- **Consensus:** BioCoin is finished in every layer. The L1 is a two-node island at 115366, not a network. The 2017 product was a fiat database plus a dead card. The daemon was decorative. There is nothing live to revive, port, or sell as crypto.
+- **Hold:** keep Railway `biocoin-peer` for **one year**, from **2026-09-12** through **2027-09-12**, then turn it off unless someone else is already hosting. Archive policy, not a revival. Leave checkpoints on. Leave seeds empty. Do not re-register expired names.
+- **Enthusiasm welcome:** write to [info@blackithart.com](mailto:info@blackithart.com). Fork the code. Build something **new** under a **new name**. Do not expect old BIO restored, the BIO ticker reused, funding, listings, or more work from this side.
+- **Build:** nothing further from this side.
+
+### Bottom line
+
+Another chain gives tools, not revenue. TalkBank packaged the only consumer-facing piece in 2018; it did not make the ICO true. This side **cannot** implement the promised platform, restore the missing chain, or stand up a bank/card/token business.
+
+The Railway peers stay up until **2027-09-12**. Enthusiasm is welcome. After that date, this side stops hosting. The record stays public.
+
+**[info@blackithart.com](mailto:info@blackithart.com)**
+
 ## Revival work that was done (2026)
 
 1. The source builds on current Linux (OpenSSL 3, Boost). Docker and Railway config are in this tree (`Dockerfile`, `docker/entrypoint.sh`, `railway.toml`).
@@ -138,11 +157,11 @@ What was not recovered: **the chain after height 115366.**
 
 1. Obtain **authentic** BioCoin `blk*.dat` and/or `bootstrap.dat` after **115366**, preferably after checkpoint **170000**. Do not load foreign block databases or foreign wallets.
 2. Find a live P2P peer with magic **`b4 f9 e1 a5`** on port **24885**. Old leads: YoBit (silent), Telegram `@biocoinchat_ru` / `@biocoinchat`, former operators.
-3. Run a node from this repository. Example: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints.**
+3. Run a node from this repository. Example: `addnode=altaria.proxy.rlwy.net:45218`. **Do not disable checkpoints.** The Railway peers are planned to stay reachable until **2027-09-12**.
 4. The website is independent of this git tree.
 5. **Never commit** wallets, keys, or private backups.
 
-This side will not do that work. Mail [info@blackithart.com](mailto:info@blackithart.com) if you intend to.
+This side will not do that work. Enthusiasm is welcome. Mail [info@blackithart.com](mailto:info@blackithart.com).
 
 ## Build and run
 
@@ -194,7 +213,7 @@ docker run --rm -p 24885:24885 \
 
 Entrypoint variables: `BIOCOIN_DATADIR` (default `/data`), `BIOCOIN_P2P_PORT` (`24885`), `BIOCOIN_RPC_PORT` (`24889`), `BIOCOIN_RPC_USER`, `BIOCOIN_RPC_PASSWORD`, `BIOCOIN_ADDNODE`, `BIOCOIN_EXTERNAL_IP`, `BIOCOIN_EXTRA_ARGS`. RPC in the image listens on `127.0.0.1`.
 
-`railway.toml`: builder `DOCKERFILE`, `dockerfilePath = "Dockerfile"`, restart `ON_FAILURE` (5 retries). Railway project: `biocoin-peer`.
+`railway.toml`: builder `DOCKERFILE`, `dockerfilePath = "Dockerfile"`, restart `ON_FAILURE` (5 retries). Railway project: `biocoin-peer`. This side holds those peers until **2027-09-12**.
 
 A local wallet can be used with the node. Do not load a foreign wallet into `/data`, and do not commit a volume that contains keys.
 

@@ -4,7 +4,9 @@ Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next 
 
 **We cannot take this further. We do not have the capabilities** (no chain after 115366, no merchants, no card/bank stack, no resources to rebuild the 2017 product). Public reflections, current affairs, and contact: [README.md](../README.md). If this is useful to you: [info@blackithart.com](mailto:info@blackithart.com).
 
-Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Checkpoints require **170000**. A 2026-09-09 internet + GitHub-account search found **no** live external BIO peer and **no** downloadable `blk` / `bootstrap` past that height. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past 115366 (ideally past 170000) or a live external BIO peer. Do not strip checkpoints; keep the Railway island. YoBit still lists BIO markets; contact attempts received no reply.
+**Final council (2026-09-12):** BioCoin is finished in every layer. This side will keep the Railway island up for **one year**, from **2026-09-12** through **2027-09-12**, then turn it off unless someone else takes the hosting. Enthusiasm is welcome. Nothing further will be built here. Write-up: [`final-council-2026.md`](final-council-2026.md).
+
+Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Checkpoints require **170000**. A 2026-09-09 internet + GitHub-account search found **no** live external BIO peer and **no** downloadable `blk` / `bootstrap` past that height. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past 115366 (ideally past 170000) or a live external BIO peer. Do not strip checkpoints. The Railway island stays until **2027-09-12**. YoBit still lists BIO markets; contact attempts received no reply.
 
 ## What this tree is
 
@@ -54,7 +56,7 @@ The two nodes can replicate **what they already have**. They cannot invent block
 
 ### Verdict
 
-**No live external BIO peer** and **no downloadable `blk*.dat` / `bootstrap.dat` past height 115366** were found. Railway island still at **115366**, tip hash above. Keep that island; do not strip checkpoints.
+**No live external BIO peer** and **no downloadable `blk*.dat` / `bootstrap.dat` past height 115366** were found. Railway island still at **115366**, tip hash above. Hold that island until **2027-09-12**; do not strip checkpoints.
 
 ### Seed / peer probes
 
@@ -118,7 +120,7 @@ Artem Kalinin / Blackithart stated there is nothing more to give: no remaining `
 
 1. Obtain authentic BioCoin block files covering **at least past 115366**, preferably **past checkpoint 170000**. `bootstrap.dat` is useful if it is BIO magic `b4 f9 e1 a5` and actually contains that range.
 2. Find any remaining live P2P peer (exchanges, old VPS, archived nodes) that still speaks BIO on port 24885 with that magic. Human outreach leads: YoBit (activity noticed, contact attempted, no reply), Telegram `@biocoinchat_ru` / `@biocoinchat`, former operators.
-3. Run the Docker/Railway node from this repo (or `makefile.unix`). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on. Keep the Railway island.
+3. Run the Docker/Railway node from this repo (or `makefile.unix`). Point `addnode` at `altaria.proxy.rlwy.net:45218` if that peer is still up. Keep checkpoints on. The Railway island is held until **2027-09-12**.
 4. Never load foreign wallets or foreign block databases onto a BIO node. Wrong magic / wrong genesis will not become BioCoin by renaming files.
 5. Website work stays at https://biocoin.blackithart.com — independent of this C++ tree.
 6. Never commit wallets or keys.

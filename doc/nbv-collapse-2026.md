@@ -58,3 +58,5 @@ Independent notes from Claude Opus, GPT, Gemini, and Muse, then a chairman synth
 - **This side:** nothing further on recovery.
 
 If someone else has authentic blocks past 115366, they can do that work themselves. Mail [info@blackithart.com](mailto:info@blackithart.com).
+
+The last council on the whole BioCoin case (year Railway hold, enthusiasm welcome, this side stops) is [`final-council-2026.md`](final-council-2026.md).
