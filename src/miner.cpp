@@ -8,6 +8,7 @@
 #include "miner.h"
 #include "kernel.h"
 #include "kernel_worker.h"
+#include <memory>
 
 using namespace std;
 
@@ -115,7 +116,7 @@ CBlock* CreateNewBlock(CWallet* pwallet, CTransaction *txCoinStake)
     bool fProofOfStake = txCoinStake != NULL;
 
     // Create new block
-    auto_ptr<CBlock> pblock(new CBlock());
+    std::unique_ptr<CBlock> pblock(new CBlock());
     if (!pblock.get())
         return NULL;
 

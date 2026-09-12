@@ -96,7 +96,7 @@ endif
 
 # CXXFLAGS can be specified on the make command line, so we use xCXXFLAGS that only
 # adds some defaults in front. Unfortunately, CXXFLAGS=... $(CXXFLAGS) does not work.
-xCXXFLAGS=$(xOPT_LEVEL) $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter \
+xCXXFLAGS=-std=gnu++11 $(xOPT_LEVEL) $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter \
     $(DEBUGFLAGS) $(DEFS) $(HARDENING) $(CXXFLAGS)
 
 # LDFLAGS can be specified on the make command line, so we use xLDFLAGS that only
