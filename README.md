@@ -17,16 +17,18 @@ Marketing site (not this repo, not the blockchain): https://biocoin.blackithart.
 
 **If any of this is useful to you, write to [info@blackithart.com](mailto:info@blackithart.com).**
 
-## Current affairs (2026-09-12)
+## Current affairs (2026-09-12, rechecked 2026-09-18)
 
 This is where things stand. Nothing further will be built from this side.
 
-**Railway hold:** the two public peers stay up for **one year from today**, through **2027-09-12**. That is an archive window, not a revival. After that date they go off unless someone else takes the hosting. Enthusiasm is welcome: [info@blackithart.com](mailto:info@blackithart.com). Final council: [`doc/final-council-2026.md`](doc/final-council-2026.md).
+**Railway hold:** the two public peers stay up for **one year from 2026-09-12**, through **2027-09-12**. That is an archive window, not a revival. After that date they go off unless someone else takes the hosting. Enthusiasm is welcome: [info@blackithart.com](mailto:info@blackithart.com). Final council: [`doc/final-council-2026.md`](doc/final-council-2026.md).
+
+**2026-09-18 housekeeping:** five 2017–2018 GitHub issues triaged in [`doc/github-triage-2026.md`](doc/github-triage-2026.md) (README, Boost `copy_file`, OpenSSL `CBigNum`, first-sync hang, optional QR). Leftover `cursor/*` branches were already on `master`. `archive/nbv-1.0.2` stays a side branch (merging it would undo OpenSSL 3). Both Railway proxies still answer `/BioCoin:1.0.1.2/` at height **115366**. No rebuild. Hard stop unchanged.
 
 - Two Railway peers still speak BioCoin `1.0.1.2` (magic `b4 f9 e1 a5`, protocol `90000`):
   - `altaria.proxy.rlwy.net:45218`
   - `altaria.proxy.rlwy.net:22792`
-- Both advertise height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Last observed tip time is **2018-03-29**. Moneysupply last seen on RPC was about **818.6M BIO**.
+- Rechecked **2026-09-18** over P2P: both answer user agent `/BioCoin:1.0.1.2/`, protocol `90000`, height **115366**. Tip hash last seen on RPC: `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Last observed tip time is **2018-03-29**. Moneysupply last seen on RPC was about **818.6M BIO**.
 - There is **no** external peer network. The two Railway nodes only see each other. DNS seeds are empty. Hardcoded `pnSeed[]` IPs are dead on `:24885`. `n001`–`n013.biocoin.pro` (the 1.0.2 / `biocoin_nbv` names) are NXDOMAIN and are **not** compiled in: an expired seed is a hijack path.
 - The second public tree `biocoin_nbv` (NETTRASH **1.0.2.17**, 2018–2019) was collapsed into this repo on 2026-09-12. Same magic, protocol `90000`, checkpoints through 170000, same dead `pnSeed[]`. No `blk` / bootstrap / wallets. Unique bits taken: Qt `uBTC,` comma and OSX dmg backgrounds. Client stays **1.0.1.2**. Full nbv history is `archive/nbv-1.0.2` + tag `v1.0.2`. Details: [`doc/nbv-collapse-2026.md`](doc/nbv-collapse-2026.md).
 - Hardened checkpoints in `src/checkpoints.cpp` go to block **170000** (August 2018). The live island stops at **115366**. There is no downloadable `blk*.dat` / `bootstrap.dat` past that height. Wayback Machine explorer JSON shows the chain once continued through checkpoint 170000 and up to ~260k by 2019. That is historical proof only, not a download source.
@@ -150,6 +152,7 @@ The Railway peers stay up until **2027-09-12**. Enthusiasm is welcome. After tha
 4. The old public site was restored separately at **https://biocoin.blackithart.com**.
 5. YoBit was contacted; there was no response.
 6. `biocoin_nbv` was fetched and archived as `archive/nbv-1.0.2` (tag `v1.0.2`). Unique 1.0.2 pieces (Qt `seeds` comma, OSX dmg backgrounds) are in this tree. The 1.0.2 DNS names stay out. Client version stays `1.0.1.2`. See [`doc/nbv-collapse-2026.md`](doc/nbv-collapse-2026.md).
+7. 2026-09-18: 2017–2018 GitHub issues and leftover branches were triaged. `makefile.unix` still builds. Railway peers still answer at 115366. See [`doc/github-triage-2026.md`](doc/github-triage-2026.md).
 
 What was not recovered: **the chain after height 115366.**
 

@@ -60,3 +60,5 @@ Independent notes from Claude Opus, GPT, Gemini, and Muse, then a chairman synth
 If someone else has authentic blocks past 115366, they can do that work themselves. Mail [info@blackithart.com](mailto:info@blackithart.com).
 
 The last council on the whole BioCoin case (year Railway hold, enthusiasm welcome, this side stops) is [`final-council-2026.md`](final-council-2026.md).
+
+**Do not merge `archive/nbv-1.0.2` into `master`.** It is the 1.0.2.17 snapshot. Putting it on `master` would undo OpenSSL 3. 2026-09-18 branch audit: [`github-triage-2026.md`](github-triage-2026.md).

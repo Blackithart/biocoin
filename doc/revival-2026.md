@@ -6,6 +6,8 @@ Status of the 2026 attempt to bring BioCoin peers and tooling back, so the next 
 
 **Final council (2026-09-12):** BioCoin is finished in every layer. This side will keep the Railway island up for **one year**, from **2026-09-12** through **2027-09-12**, then turn it off unless someone else takes the hosting. Enthusiasm is welcome. Nothing further will be built here. Write-up: [`final-council-2026.md`](final-council-2026.md).
 
+**Housekeeping (2026-09-18):** 2017–2018 GitHub issues, leftover `cursor/*` branches, and `archive/nbv-1.0.2` were audited. Railway peers rechecked live at 115366. No rebuild. Verdict unchanged: [`github-triage-2026.md`](github-triage-2026.md).
+
 Nodes were built and two Railway peers talk to each other. The chain stops at height **115366**, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`. Checkpoints require **170000**. A 2026-09-09 internet + GitHub-account search found **no** live external BIO peer and **no** downloadable `blk` / `bootstrap` past that height. The original operator has no more blk files, peers, or backups. Continuation needs authentic blocks past 115366 (ideally past 170000) or a live external BIO peer. Do not strip checkpoints. The Railway island stays until **2027-09-12**. YoBit still lists BIO markets; contact attempts received no reply.
 
 ## What this tree is
@@ -41,13 +43,14 @@ Project id `2ff03dc3-90c6-4931-a46d-ae8ba13541e8`, environment `production`.
 | service | public P2P | notes |
 | --- | --- | --- |
 | `biocoin-peer` | `altaria.proxy.rlwy.net:45218` | last observed height **115366**, moneysupply ≈ 818.6M BIO |
-| `biocoin-peer-2` | `altaria.proxy.rlwy.net:22792` | `BIOCOIN_ADDNODE=altaria.proxy.rlwy.net:45218` |
+| `biocoin-peer-2` | `altaria.proxy.rlwy.net:22792` | `BIOCOIN_ADDNODE=altaria.proxy.rlwy.net:45218`; was 115365 on 2026-09-09, **115366** on 2026-09-18 P2P recheck |
 
 Observed `getinfo` on 2026-09-09 via `railway ssh` (re-checked later the same day):
 
 - `biocoin-peer`: `blocks` 115366, tip hash `0553d020c4e03f4c54adbeeff37d48551c175e4eb273c202e077f1902714ef60`, tip time **2018-03-29** (`1522360302`), `moneysupply` 818600206.73485589, `connections` 3–4, `testnet` false, sync-checkpoint policy **strict** (sync checkpoint still at genesis).
 - `biocoin-peer-2`: `blocks` 115365, `connections` 3 (only the first Railway node / overlay).
 - `getpeerinfo`: only `/BioCoin:1.0.1.2/` peers inside the Railway pair. No external historical peer.
+- **2026-09-18 P2P recheck** (version handshake, magic `b4 f9 e1 a5`): both public proxies still return `/BioCoin:1.0.1.2/`, protocol `90000`, advertised height **115366**. Local `makefile.unix` still links `BioCoind` on Ubuntu 24.04 / OpenSSL 3. No Railway rebuild: daemon recipe did not change after the 2026-09-12 doc / archive commits, and this environment has no Railway API token. See [`github-triage-2026.md`](github-triage-2026.md).
 - Hardened checkpoints **0 … 112342** on the live tip match `src/checkpoints.cpp`. Height **130000** is out of range (`Block number out of range`). Next compiled checkpoints are 130000 / 150000 / **170000**.
 
 The two nodes can replicate **what they already have**. They cannot invent blocks after 115366.

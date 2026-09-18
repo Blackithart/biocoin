@@ -6,6 +6,8 @@ Independent notes from Claude Opus, GPT, Gemini, and Muse, then a chairman synth
 
 **This is the last word from this side.**
 
+Housekeeping **2026-09-18** (issues, leftover branches, archive, Railway recheck) did **not** change this verdict or the hold date: [`github-triage-2026.md`](github-triage-2026.md).
+
 ## Hold
 
 Railway project `biocoin-peer` (the two public peers) will stay up for **one year from 2026-09-12**, through **2027-09-12**. That is an archive window, not a revival. After that date the nodes go off unless someone else takes the hosting.
